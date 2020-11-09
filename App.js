@@ -26,7 +26,7 @@ const validate = values => {
   }
   return error;
 };
-class SimpleForm extends Component {
+class Form extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -79,4 +79,4 @@ class SimpleForm extends Component {
 export default Login({
   form: 'test',
   validate
-})(SimpleForm)
+})(Form)
