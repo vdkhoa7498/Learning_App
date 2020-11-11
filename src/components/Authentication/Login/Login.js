@@ -1,53 +1,49 @@
-import React from "react";
-import { Provider } from "react-redux";
-import { Field, reduxForm } from "redux-form";
-import store from "./store";
+import React from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 
-const validate = values => {
-  const errors = {};
-
-  if (!values.username) {
-    errors.username = "Required";
-  } else if (values.username === "admin") {
-    errors.username = "Nice try!";
-  }
-
-  if (!values.password) {
-    errors.password = "Required";
-  } else if (values.password.length < 4) {
-    errors.password = "Password have more 4 character";
-  }
-
-  return errors;
-};
-
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <>
-    <input {...input} placeholder={label} type={type} />
-    {touched && error && <span>{error}</span>}
-  </>
-);
-
-const Form = props => {
-  const { handleSubmit } = props;
-  const onSubmit = values => console.log(values);
-
+export default function Login() {
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Field name="username" component={renderField} label="Username" />
-      <Field name="password" type="password" component={renderField} label="Password" />
-    
-      <button type="submit">Login</button>
-    </form>
+    <View style={styles.container}>
+      <Image source = {require('../../../../assets/login.png')}/>
+      <TextInput
+        style = {styles.textInput}
+        placeholder = "User Name"
+      />
+      <TextInput
+        style = {styles.textInput}
+        placeholder = "Password"
+      />
+      <TouchableOpacity 
+        style = {styles.btn}>
+        <Text style = {styles.btnText}>Login</Text>
+      </TouchableOpacity>
+    </View>
   );
-};
+}
 
-const FormRedux = reduxForm({ form: "syncValidation", validate })(Form);
-
-const Login = () => (
-  <Provider store={store}>
-    <FormRedux />
-  </Provider>
-);
-
-export default Login;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textInput:{
+    height: 40,
+    marginTop: 20,
+    textAlign: "center",
+    borderColor: "gray",
+    borderWidth: 1
+  },
+  btn:{
+    height: 40,
+    marginTop: 20,
+    width: "98%",
+    backgroundColor: "blue",
+    alignItems: "center"
+  },
+  btnText:{
+    justifyContent: "center",
+    textAlign: "center",
+  }
+});
