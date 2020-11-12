@@ -1,12 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './src/components/Authentication/Login/Login';
-import ForgetPassword from './src/components/Authentication/ForgetPassword/ForgetPassword';
+import Home from './src/components/Main/Home/Home'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ForgetPassword/>
+      <Home/>
     </View>
   );
 }
