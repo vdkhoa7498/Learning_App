@@ -1,26 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import SectionCourses from './SectionCourses/SectionCourses'
+import ImageButton from '../../Common/image-button'
 
 export default function Home() {
 
   return (
-    <View style={styles.container}>
+    <ScrollView>
+      <ImageButton title='NEW/nREALESE'/>
       <SectionCourses title='Continue learning'/>
       <SectionCourses title='Path'/>
       <SectionCourses title='Channel'/>
       <SectionCourses title='Bookmarks'/>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   item:{
       margin: 5,
       width: 200,
