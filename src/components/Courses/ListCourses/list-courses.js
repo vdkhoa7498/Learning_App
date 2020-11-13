@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView } from 'react-native';
-import SectionCoursesItem from ''
+import { StyleSheet, View, FlatList } from 'react-native';
+import ListCoursesItem from '../ListCoursesItem/list-courses-item'
 export default function ListCourses(props) {
   const courses = [
       {
@@ -21,18 +21,11 @@ export default function ListCourses(props) {
     }
   ]
 
-  const renderListItem = (courses) =>{
-      return courses.map(<SectionCoursesItem item={item}/>)
-  }
-
   return (
     <View style={styles.container}>
-      <View>
-        <Text>{this.props.title}</Text>
-      </View>
-      <ScrollView>
-
-      </ScrollView>
+      <FlatList data={courses}
+        renderItem = {({item})  => <ListCoursesItem item={item}/>}
+      />
     </View>
   );
 }

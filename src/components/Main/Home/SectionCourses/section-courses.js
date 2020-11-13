@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import SectionCoursesItem from '../SectionCoursesItem/SectionCoursesItem';
+import SectionCoursesItem from '../SectionCoursesItem/section-courses-item';
 
 export default function SectionCourses(props) {
   const courses = [
