@@ -6,12 +6,46 @@ import ListCourses from './src/components/Courses/ListCourses/list-courses'
 import Browse from './src/components/Main/Browse/Browse'
 import Search from './src/components/Main/Search/Search'
 import Downloads from './src/components/Main/Downloads/Downloads'
+import CoursesDetail from './src/components/CourseDetail/CourseDetail'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
+
+const MainStack = createStackNavigator();
+const RootStack = createStackNavigator();
+
+function MainStackScreen() {
+  return (
+    <MainStack.Navigator>
+      <MainStack.Screen name="Home" component={Home} />
+      <MainStack.Screen 
+        name="CoursesDetail" 
+        component={CoursesDetail} 
+        options={
+          title = 'Courses Detail'
+        }
+      />
+      <MainStack.Screen name="ListCourses" component={ListCourses} />
+    </MainStack.Navigator>
+  );
+}
+
+function RootStackScreen() {
+  return (
+    <RootStack.Navigator mode="modal">
+      <RootStack.Screen
+        name="Main"
+        component={MainStackScreen}
+        options={{ headerShown: false }}
+      />
+      <RootStack.Screen name="MyModal" component={ModalScreen} />
+    </RootStack.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -23,10 +57,17 @@ export default function App() {
 
             if (route.name === 'Home') {
               iconName = focused
-                ? 'ios-information-circle'
-                : 'home';
-            } else if (route.name === 'Search') {
-              iconName = focused ? 'ios-list-box' : 'ios-list';
+                ? 'ios-home-outline'
+                : 'ios-home-outline';
+            } 
+            else if (route.name === 'Download') {
+              iconName = focused ? 'ios-arrow-down' : 'ios-arrow-down';
+            }
+            else if (route.name === 'Browse') {
+              iconName = focused ? 'ios-apps-sharp' : 'ios-apps-sharp';
+            }
+            else if (route.name === 'Search') {
+              iconName = focused ? 'ios-search' : 'ios-search';
             }
 
             // You can return any component that you like here!
@@ -34,7 +75,7 @@ export default function App() {
           },
         })}
         tabBarOptions={{
-          activeTintColor: 'tomato',
+          activeTintColor: 'blue',
           inactiveTintColor: 'gray',
         }}
       >
