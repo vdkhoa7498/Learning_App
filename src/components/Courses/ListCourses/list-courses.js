@@ -66,28 +66,8 @@ export default function ListCourses(props) {
 
 ]
 
-  const renderSearchView = () => {
-    return (
-      <View style={{flexDirection: 'row'}}>
-        <TextInput 
-          placeholder = 'search text'
-          style = {{flex: 1, borderColor: 'gray', borderWidth: 1}}
-          />
-        <Button 
-          onPress = {() => {console.log('search')}}
-          title = 'Search'
-          style = {{width: 60, height: 40, margin: 5}}
-        />
-      </View>
-    );
-  }
-
   return (
     <View style={styles.container}>
-      {/* <FlatList data={courses}
-        renderItem = {({item})  => <ListCoursesItem item={item}/>}
-        ListHeaderComponent = {() => searchView()}
-      /> */}
       <View>
         {renderSearchView()}
       </View>
@@ -102,10 +82,7 @@ export default function ListCourses(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row'
   },
   textInput:{
     height: 40,

@@ -3,6 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import 'react-native-gesture-handler'
 import Home from './src/components/Main/Home/Home'
 import ListCourses from './src/components/Courses/ListCourses/list-courses'
+import Browse from './src/components/Main/Browse/Browse'
+import Search from './src/components/Main/Search/Search'
+import Downloads from './src/components/Main/Downloads/Downloads'
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -20,8 +24,8 @@ export default function App() {
             if (route.name === 'Home') {
               iconName = focused
                 ? 'ios-information-circle'
-                : 'ios-information-circle-outline';
-            } else if (route.name === 'Settings') {
+                : 'home';
+            } else if (route.name === 'Search') {
               iconName = focused ? 'ios-list-box' : 'ios-list';
             }
 
@@ -35,7 +39,9 @@ export default function App() {
         }}
       >
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="List Courses" component={ListCourses} />
+        <Tab.Screen name="Downloads" component={Downloads} />
+        <Tab.Screen name="Browse" component={Browse} />
+        <Tab.Screen name="Search" component={Search} />
       </Tab.Navigator>
     </NavigationContainer>
   );

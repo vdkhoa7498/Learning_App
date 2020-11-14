@@ -10,7 +10,14 @@ export default function ListCoursesItem(props){
                 Alert.alert('Pressed on List Item')
             }}
         >
-            <Course item={props.item} />
+            <View style={styles.item}>
+              <Image source={{uri: `{$props.item.uri}`}} style={styles.image}/>
+              <View style={styles.viewText}>
+                <Text style={styles.darkText}>{props.item.title}</Text>
+                <Text style={styles.darkText}>{props.item.author}</Text>
+                <Text style={styles.darkText}>{`${props.item.level} , ${props.item.released} , ${props.item.duration}`}</Text>
+              </View>
+            </View>
         </TouchableOpacity>
     );
 }
