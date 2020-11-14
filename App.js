@@ -20,37 +20,26 @@ const RootStack = createStackNavigator();
 
 function MainStackScreen() {
   return (
-    <MainStack.Navigator>
+    <MainStack.Navigator mode = "modal">
       <MainStack.Screen name="Home" component={Home} />
       <MainStack.Screen 
         name="CoursesDetail" 
         component={CoursesDetail} 
-        options={
-          title = 'Courses Detail'
-        }
+        options={{
+          title: 'Courses Detail',
+          headerShown: false
+        }}
       />
       <MainStack.Screen name="ListCourses" component={ListCourses} />
     </MainStack.Navigator>
   );
 }
 
-function RootStackScreen() {
-  return (
-    <RootStack.Navigator mode="modal">
-      <RootStack.Screen
-        name="Main"
-        component={MainStackScreen}
-        options={{ headerShown: false }}
-      />
-      <RootStack.Screen name="MyModal" component={ModalScreen} />
-    </RootStack.Navigator>
-  );
-}
-
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
+      <MainStackScreen/>
+      {/* <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -83,7 +72,7 @@ export default function App() {
         <Tab.Screen name="Downloads" component={Downloads} />
         <Tab.Screen name="Browse" component={Browse} />
         <Tab.Screen name="Search" component={Search} />
-      </Tab.Navigator>
+      </Tab.Navigator> */}
     </NavigationContainer>
   );
 }

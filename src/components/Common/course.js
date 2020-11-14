@@ -8,7 +8,7 @@ import CoursesDetail from '../CourseDetail/CourseDetail'
 
 export default function Course(props){
   const onPress = () =>{
-    props.navigation.navigate('CoursesDetail')
+    props.navigation.push('CoursesDetail')
   }
 
     return (

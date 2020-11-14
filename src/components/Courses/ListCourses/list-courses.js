@@ -63,7 +63,6 @@ export default function ListCourses(props) {
         }
     ]
     }
-
 ]
 
   return (

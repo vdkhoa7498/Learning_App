@@ -13,7 +13,6 @@ export default function Register() {
         style = {styles.textInput}
         placeholder = "New Password"
       />
-
       <TextInput
         style = {styles.textInput}
         placeholder = "Confirm Password"
