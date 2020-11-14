@@ -4,7 +4,7 @@ import {View, Image, Text, StyleSheet} from 'react-native'
 export default function Course(props){
     return (
         <View style={styles.item}>
-            <Image source={{uri: 'https://miro.medium.com/max/700/1*QDQvlCg420lzRElCK4AYhw.png'}} style={styles.image}/>
+            <Image source={{uri: `${props.item.uri}`}} style={styles.image}/>
             <View style={styles.viewText}>
               <Text style={styles.darkText}>{props.item.title}</Text>
               <Text style={styles.darkText}>{props.item.author}</Text>

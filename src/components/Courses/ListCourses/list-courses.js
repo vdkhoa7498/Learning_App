@@ -66,7 +66,7 @@ export default function ListCourses(props) {
 
 ]
 
-  const searchView = () => {
+  const renderSearchView = () => {
     return (
       <View style={{flexDirection: 'row'}}>
         <TextInput 
@@ -88,6 +88,9 @@ export default function ListCourses(props) {
         renderItem = {({item})  => <ListCoursesItem item={item}/>}
         ListHeaderComponent = {() => searchView()}
       /> */}
+      <View>
+        {renderSearchView()}
+      </View>
       <SectionList
         sections = {courses}
         renderItem = {({item})  => <ListCoursesItem item={item}/>}

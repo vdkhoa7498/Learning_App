@@ -10,7 +10,8 @@ export default function SectionCourses(props) {
           author: "Hai Pham",
           level: "Advance",
           released: "Nov 6, 2020",
-          duration: "30 hours"
+          duration: "30 hours",
+          uri: 'https://vnreview.vn/image/19/18/53/1918537.jpg'
       },
       {
         id: 2,
@@ -18,7 +19,8 @@ export default function SectionCourses(props) {
         author: "Hai Pham",
         level: "Advance",
         released: "Nov 6, 2020",
-        duration: "30 hours"
+        duration: "30 hours",
+        uri: 'https://fptshop.com.vn/Uploads/images/2015/Tin-Tuc/TP/29-12-2015/he-dieu-hanh-ios-la-gi-1.jpg'
     },
     {
       id: 3,
@@ -26,7 +28,8 @@ export default function SectionCourses(props) {
       author: "Hai Pham",
       level: "Advance",
       released: "Nov 6, 2020",
-      duration: "30 hours"
+      duration: "30 hours",
+      uri: 'https://miro.medium.com/max/1000/1*kQ11_TLArd7xGuWiSomBSg.png'
   }
   ]
 
