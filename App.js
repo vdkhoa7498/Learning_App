@@ -6,8 +6,8 @@ import ListCourses from './src/components/Courses/ListCourses/list-courses'
 export default function App() {
   return (
     <View style={styles.container}>
-      <Home/>
-      {/* <ListCourses/> */}
+      {/* <Home/> */}
+      <ListCourses/>
     </View>
   );
 }
