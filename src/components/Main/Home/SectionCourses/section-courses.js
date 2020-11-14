@@ -34,7 +34,7 @@ export default function SectionCourses(props) {
   ]
 
   const renderListItem = () =>{
-      return courses.map( item => <SectionCoursesItem item={item}/>);
+      return courses.map( item => <SectionCoursesItem item={item} navigation={props.navigation}/>);
       // return courses.map(Item => <SectionCoursesItem Item = {Item}/>);
   }
 

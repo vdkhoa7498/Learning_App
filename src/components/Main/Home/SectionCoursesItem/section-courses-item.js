@@ -4,6 +4,6 @@ import Course from '../../../Common/course'
 
 export default function SectionCoursesItem(props) {
   return (
-    <Course item = {props.item}/>
+    <Course item = {props.item} navigation={props.navigation}/>
   );
 }

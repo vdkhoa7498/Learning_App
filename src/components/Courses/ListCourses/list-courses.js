@@ -72,7 +72,7 @@ export default function ListCourses(props) {
       </View>
       <SectionList
         sections = {courses}
-        renderItem = {({item})  => <ListCoursesItem item={item}/>}
+        renderItem = {({item})  => <ListCoursesItem item={item} navigation = {props.navigation} />}
         renderSectionHeader = {({section: {title}}) => <Text>{title}</Text>}
       />
     </View>
