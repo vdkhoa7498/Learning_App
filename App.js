@@ -1,82 +1,87 @@
-import React , { Component } from 'react';
-import Expo from 'expo';
-import { View } from 'react-native';
-import { Container, Item, Input, Header, Body, Content, Title, Button, Text } from 'native-base';
-import { Field,reduxForm } from 'redux-form';
-const validate = values => {
-  const error= {};
-  error.username= '';
-  error.password= '';
-  var ema = values.username;
-  var nm = values.password;
-  if(values.username === undefined){
-    ema = '';
-  }
-  if(values.password === undefined){
-    nm = '';
-  }
-  if(ema.length < 8 && ema !== ''){
-    error.username= 'too short';
-  }
-  if(!ema.includes('@') && ema !== ''){
-    error.username= '@ not included';
-  }
-  if(nm.length > 8){
-    error.password= 'max 8 characters';
-  }
-  return error;
-};
-class SimpleForm extends Component {
-  constructor(props){
-    super(props);
-    this.state={
-      isReady: false
-    };
-    this.renderInput = this.renderInput.bind(this);
-  }
-  async componentWillMount() {
-      await Expo.Font.loadAsync({
-        'Roboto': require('native-base/Fonts/Roboto.ttf'),
-        'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-      });
-      this.setState({isReady: true});
-    }
-  renderInput({ input, label, type, meta: { touched, error, warning } }){
-    var hasError= false;
-    if(error !== undefined){
-      hasError= true;
-    }
-    return( 
-      <Item error= {hasError}>
-        <Input {...input}/>
-        {hasError ? <Text>{error}</Text> : <Text />}
-      </Item>
-    )
-  }
-  render(){
-     const { handleSubmit, reset } = this.props;
-     if (!this.state.isReady) {
-      return <Expo.AppLoading />;
-    }
-    return (
-      <Container>
-        <Header>
-          <Body>
-            <Title>Redux Form</Title>
-          </Body>
-        </Header>
-        <Content padder>
-          <Field name="username" component={this.renderInput} />
-          <Field name="password" component={this.renderInput} />
-          <Button block primary onPress= {reset}>
-            <Text>Login</Text>
-          </Button>
-        </Content>
-      </Container>
-    )
-  }
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler'
+import Home from './src/components/Main/Home/Home'
+import ListCourses from './src/components/Courses/ListCourses/list-courses'
+import Browse from './src/components/Main/Browse/Browse'
+import Search from './src/components/Main/Search/Search'
+import Downloads from './src/components/Main/Downloads/Downloads'
+import CoursesDetail from './src/components/CourseDetail/CourseDetail'
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+const Tab = createBottomTabNavigator();
+
+const MainStack = createStackNavigator();
+const RootStack = createStackNavigator();
+
+function MainStackScreen() {
+  return (
+    <MainStack.Navigator mode = "modal">
+      <MainStack.Screen name="Home" component={Home} />
+      <MainStack.Screen 
+        name="CoursesDetail" 
+        component={CoursesDetail} 
+        options={{
+          title: 'Courses Detail',
+          headerShown: false
+        }}
+      />
+      <MainStack.Screen name="ListCourses" component={ListCourses} />
+    </MainStack.Navigator>
+  );
 }
-export default Login({
-  form: 'test',
-  validate
-})(SimpleForm)
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MainStackScreen/>
+      {/* <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+
+            if (route.name === 'Home') {
+              iconName = focused
+                ? 'ios-home-outline'
+                : 'ios-home-outline';
+            } 
+            else if (route.name === 'Download') {
+              iconName = focused ? 'ios-arrow-down' : 'ios-arrow-down';
+            }
+            else if (route.name === 'Browse') {
+              iconName = focused ? 'ios-apps-sharp' : 'ios-apps-sharp';
+            }
+            else if (route.name === 'Search') {
+              iconName = focused ? 'ios-search' : 'ios-search';
+            }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: 'blue',
+          inactiveTintColor: 'gray',
+        }}
+      >
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Downloads" component={Downloads} />
+        <Tab.Screen name="Browse" component={Browse} />
+        <Tab.Screen name="Search" component={Search} />
+      </Tab.Navigator> */}
+    </NavigationContainer>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

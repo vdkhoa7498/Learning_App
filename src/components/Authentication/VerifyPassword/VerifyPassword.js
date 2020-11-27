@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 
-export default function Register() {
+export default function ForgetPassword() {
   return (
     <View style={styles.container}>
       <Image source = {require('../../../../assets/login.png')}/>
@@ -11,15 +11,11 @@ export default function Register() {
       />
       <TextInput
         style = {styles.textInput}
-        placeholder = "New Password"
-      />
-      <TextInput
-        style = {styles.textInput}
-        placeholder = "Confirm Password"
+        placeholder = "Verify Code"
       />
       <TouchableOpacity 
         style = {styles.btn}>
-        <Text style = {styles.btnText}>Register</Text>
+        <Text style = {styles.btnText}>Reset Password</Text>
       </TouchableOpacity>
     </View>
   );
