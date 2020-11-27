@@ -39,7 +39,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <MainStackScreen/>
-      {/* <Tab.Navigator
+      <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -72,7 +72,7 @@ export default function App() {
         <Tab.Screen name="Downloads" component={Downloads} />
         <Tab.Screen name="Browse" component={Browse} />
         <Tab.Screen name="Search" component={Search} />
-      </Tab.Navigator> */}
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
