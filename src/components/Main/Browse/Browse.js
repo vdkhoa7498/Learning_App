@@ -1,8 +1,27 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
 import SectionCourses from '../Home/SectionCourses/section-courses'
+import CoursesDetail from './src/components/CourseDetail/CourseDetail'
 import ImageButton from '../../Common/image-button'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
+const MainStack = createStackNavigator();
+
+function MainStackScreen() {
+  return (
+    <MainStack.Navigator mode = "modal">
+      <MainStack.Screen 
+        name="CoursesDetail" 
+        component={CoursesDetail} 
+        options={{
+          title: 'Courses Detail',
+          headerShown: false
+        }}
+      />
+    </MainStack.Navigator>
+  );
+}
 
 export default function Browse() {
 

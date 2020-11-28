@@ -10,12 +10,9 @@ import CoursesDetail from './src/components/CourseDetail/CourseDetail'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
-
-
 
 export default function App() {
   return (

@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 export default function CoursesDetail(props){
     return (
         <View style={styles.container}>
-            <Video style = {{height: 300}}></Video>
+            {/* <Video style = {{height: 300}}></Video> */}
             <Text>React Native</Text>
             <ScrollView horizontal='true'>
                 <Ionicons name={'ios-bookmarks-outline'} color='black' />
