@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
-// import SectionCourses from '../'
+import SectionCourses from '../Home/SectionCourses/section-courses'
 import ImageButton from '../../Common/image-button'
+
 
 export default function Browse() {
 
@@ -35,10 +36,10 @@ export default function Browse() {
             <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
           </View>
       </ScrollView>
-      {/* <SectionCourses title='Continue learning'/> */}
-      {/* <SectionCourses title='Path'/> */}
-      {/* <SectionCourses title='Channel'/>
-      <SectionCourses title='Bookmarks'/> */}
+      <SectionCourses title='Continue learning'/>
+      <SectionCourses title='Path'/>
+      <SectionCourses title='Channel'/>
+      <SectionCourses title='Bookmarks'/>
     </ScrollView>
   );
 }

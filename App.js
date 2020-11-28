@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {  } from 'react-native';
 import 'react-native-gesture-handler'
 import Home from './src/components/Main/Home/Home'
 import ListCourses from './src/components/Courses/ListCourses/list-courses'
@@ -15,30 +15,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
-const MainStack = createStackNavigator();
-const RootStack = createStackNavigator();
 
-function MainStackScreen() {
-  return (
-    <MainStack.Navigator mode = "modal">
-      <MainStack.Screen name="Home" component={Home} />
-      <MainStack.Screen 
-        name="CoursesDetail" 
-        component={CoursesDetail} 
-        options={{
-          title: 'Courses Detail',
-          headerShown: false
-        }}
-      />
-      <MainStack.Screen name="ListCourses" component={ListCourses} />
-    </MainStack.Navigator>
-  );
-}
 
 export default function App() {
   return (
     <NavigationContainer>
-      <MainStackScreen/>
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -76,12 +57,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
