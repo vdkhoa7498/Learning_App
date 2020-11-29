@@ -38,7 +38,7 @@ const DownloadsStackScreen = () => (
   </DownloadsStack.Navigator>
 );
 
-const MainTabNavigator
+// const MainTabNavigator
 
 export default function App() {
   return (
