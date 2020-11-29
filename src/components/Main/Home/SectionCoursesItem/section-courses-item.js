@@ -7,10 +7,7 @@ import CoursesDetail from '../../../CourseDetail/CourseDetail'
 
 export default function SectionCoursesItem(props) {
   return (
-    <>
-      <MainStackScreen/>
-      <Course item = {props.item}/>
-    </>
+    <Course navigation = {props.navigation} item = {props.item}/>
   );
     
 }

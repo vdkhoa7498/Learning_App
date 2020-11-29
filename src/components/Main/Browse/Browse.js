@@ -1,29 +1,10 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
 import SectionCourses from '../Home/SectionCourses/section-courses'
-import CoursesDetail from './src/components/CourseDetail/CourseDetail'
+import CoursesDetail from '../../CourseDetail/CourseDetail'
 import ImageButton from '../../Common/image-button'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-const MainStack = createStackNavigator();
-
-function MainStackScreen() {
-  return (
-    <MainStack.Navigator mode = "modal">
-      <MainStack.Screen 
-        name="CoursesDetail" 
-        component={CoursesDetail} 
-        options={{
-          title: 'Courses Detail',
-          headerShown: false
-        }}
-      />
-    </MainStack.Navigator>
-  );
-}
-
-export default function Browse() {
+export default function Browse(props) {
 
   const onPressNewReleases = () => {
     console.log('Pressed on New Releases')
@@ -55,10 +36,10 @@ export default function Browse() {
             <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
           </View>
       </ScrollView>
-      <SectionCourses title='Continue learning'/>
-      <SectionCourses title='Path'/>
-      <SectionCourses title='Channel'/>
-      <SectionCourses title='Bookmarks'/>
+      <SectionCourses navigation={props.navigation} title='Continue learning'/>
+      <SectionCourses navigation={props.navigation} title='Path'/>
+      <SectionCourses navigation={props.navigation} title='Channel'/>
+      <SectionCourses navigation={props.navigation} title='Bookmarks'/>
     </ScrollView>
   );
 }
