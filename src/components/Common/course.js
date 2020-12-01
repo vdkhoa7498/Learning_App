@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 export default function Course(props){
   const onPress = () =>{
-    props.navigation.push("CoursesDetail")
+    props.navigation.push("CoursesDetail", {item: props.item})
   }
 
     return (
@@ -21,7 +21,7 @@ export default function Course(props){
             </View>
           </TouchableOpacity>
             
-    </View>
+        </View>
     );
 }
 

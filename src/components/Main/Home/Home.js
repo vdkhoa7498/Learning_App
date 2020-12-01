@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import SectionCourses from './SectionCourses/section-courses'
 import ImageButton from '../../Common/image-button'
 
-export default function Home() {
+export default function Home(props) {
 
   const onPressNewReleases = () => {
     console.log('Pressed on New Releases')
@@ -12,10 +12,33 @@ export default function Home() {
   return (
     <ScrollView>
       <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
-      <SectionCourses title='Continue learning'/>
-      <SectionCourses title='Path'/>
-      <SectionCourses title='Channel'/>
-      <SectionCourses title='Bookmarks'/>
+      <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+      <ScrollView horizontal = {true}>
+          <View>
+            <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
+            <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+          </View>
+          <View>
+            <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
+            <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+          </View>
+          <View>
+            <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
+            <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+          </View>
+          <View>
+            <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
+            <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+          </View>
+          <View>
+            <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
+            <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+          </View>
+      </ScrollView>
+      <SectionCourses navigation={props.navigation} title='Continue learning'/>
+      <SectionCourses navigation={props.navigation} title='Path'/>
+      <SectionCourses navigation={props.navigation} title='Channel'/>
+      <SectionCourses navigation={props.navigation} title='Bookmarks'/>
     </ScrollView>
   );
 }
