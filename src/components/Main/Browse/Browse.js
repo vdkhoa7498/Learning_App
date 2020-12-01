@@ -12,28 +12,28 @@ export default function Browse(props) {
 
   return (
     <ScrollView>
-      <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
-      <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='NEW REALESE' onPress={onPressNewReleases()}/>
+      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
       <ScrollView horizontal = {true}>
           <View>
-            <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
-            <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='CONFERENCES' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='CERTIFICATIONS' onPress={onPressNewReleases()}/>
           </View>
           <View>
-            <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
-            <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='<Software> DEVELOPMENT' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='IT' onPress={onPressNewReleases()}/>
           </View>
           <View>
-            <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
-            <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='Information and CYBER SECURITY' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='DATA PROFESSIONAL' onPress={onPressNewReleases()}/>
           </View>
           <View>
-            <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
-            <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='BUSINESS PROFESSIONAL' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='Creative PROFESSIONAL' onPress={onPressNewReleases()}/>
           </View>
           <View>
-            <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
-            <ImageButton title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='NEW REALESE' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
           </View>
       </ScrollView>
       <SectionCourses navigation={props.navigation} title='Continue learning'/>

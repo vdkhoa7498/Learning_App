@@ -3,12 +3,12 @@ import {ImageBackground, StyleSheet, TouchableOpacity, Text} from 'react-native'
 
 export default function ImageButton(props){
     return(
-        <ImageBackground style={styles.button} source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTJky6mI6UQiVIz69ABiaxKvBoqRcZIDxurlw&usqp=CAU'}}>
+        <ImageBackground style={styles.button} source={{uri: `${props.image}`}}>
             <TouchableOpacity 
                 style={styles.touch}
                 onPress = {props.onPress}
             >
-                <Text>{props.title}</Text>
+                <Text style={styles.title} >{props.title}</Text>
             </TouchableOpacity>
         </ImageBackground>
     );
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    text:{
+    title:{
         fontSize: 24,
         color: 'white',
         fontWeight: 'bold'
