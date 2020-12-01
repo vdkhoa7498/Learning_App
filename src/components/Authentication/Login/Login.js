@@ -1,18 +1,21 @@
-import { useLinkProps } from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { loginServices } from '../../../core/services/authentication-services';
 import {ScreenKey} from '../../../globals/constants'
+
+export const AuthenticationContext = React.createContext();
 
 export default function Login(props) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState(null);
+  const [info, setInfo] = useState(null)
 
   useEffect(()=>{
     if (status && status.status === 200){
       props.navigation.navigate(ScreenKey.MainTabScreen)
+      setInfo(loginServices.info)
     }
   })
 
@@ -28,6 +31,7 @@ export default function Login(props) {
       }
   } 
   return (
+    <AuthenticationContext.Provider value= {{info, setInfo}}>
     <View style={styles.container}>
       <Image style ={styles.img} source = {require('../../../../assets/login.png')}/>
       <TextInput
@@ -52,6 +56,7 @@ export default function Login(props) {
         <Text style = {styles.btnText}>Login</Text>
       </TouchableOpacity>
     </View>
+    </AuthenticationContext.Provider>
   );
 }
 
