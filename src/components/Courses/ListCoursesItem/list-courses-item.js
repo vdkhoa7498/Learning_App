@@ -3,39 +3,41 @@ import {View, Text, Image, TouchableOpacity, Alert, StyleSheet} from 'react-nati
 import Course from '../../Common/course'
 
 export default function ListCoursesItem(props){
+  const onPress = () =>{
+    props.navigation.push("CoursesDetail", {item: props.item})
+  }
+
+
     return (
-        <TouchableOpacity
-            style = {styles.item}
-            onPress={() => {
-                Alert.alert('Pressed on List Item')
-            }}
-        >
-            <View style={styles.item}>
-              <Image source={{uri: `{$props.item.uri}`}} style={styles.image}/>
-              <View style={styles.viewText}>
-                <Text style={styles.darkText}>{props.item.title}</Text>
-                <Text style={styles.darkText}>{props.item.author}</Text>
-                <Text style={styles.darkText}>{`${props.item.level} , ${props.item.released} , ${props.item.duration}`}</Text>
-              </View>
-            </View>
-        </TouchableOpacity>
+      <View style={styles.item}>
+        <TouchableOpacity onPress={onPress}>
+          <Image source={{uri: `${props.item.uri}`}} style={styles.image}/>
+          <View style={styles.viewText}>
+            <Text style={styles.darkText}>{props.item.title}</Text>
+            <Text style={styles.darkText}>{props.item.author}</Text>
+            <Text style={styles.darkText}>{`${props.item.level} , ${props.item.released} , ${props.item.duration}`}</Text>
+          </View>
+        </TouchableOpacity>  
+    </View>
     );
 }
 
 const styles = StyleSheet.create({
     item:{
         margin: 5,
-        width: 200,
         height: 200,
         backgroundColor: 'lightgray',
+        flex:1,
+        flexDirection: 'column'
     },
     viewText:{
-      margin: 5
+      margin: 5,
     },
     darkText:{
       color: 'darkgray'
     },
     image: {
-      height: 100
+      height: 200,
+      width: 200
     }
   })

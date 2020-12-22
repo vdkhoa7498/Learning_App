@@ -2,13 +2,12 @@ import React from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import CoursesDetail from '../CourseDetail/CourseDetail'
 
 
 
 export default function Course(props){
   const onPress = () =>{
-    props.navigation.push('CoursesDetail')
+    props.navigation.push("CoursesDetail", {item: props.item})
   }
 
     return (
@@ -22,7 +21,7 @@ export default function Course(props){
             </View>
           </TouchableOpacity>
             
-    </View>
+        </View>
     );
 }
 

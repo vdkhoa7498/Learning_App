@@ -1,30 +1,37 @@
 import React from 'react'
-import {View, ScrollView, Text, StyleSheet} from 'react-native'
+import {View, Image, Text, StyleSheet} from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 export default function CoursesDetail(props){
+    const item = props.route.params.item
     return (
         <View style={styles.container}>
-            <Video style = {{height: 300}}></Video>
-            <Text>React Native</Text>
-            <ScrollView horizontal='true'>
-                <Ionicons name={'ios-bookmarks-outline'} color='black' />
-                <Ionicons name={'ios-radio-sharp'} color='black' />
-                <Ionicons name={'ios-arrow-down'} color='black' />
-            </ScrollView>
+            <Image source={{uri: `${item.uri}`}} style={styles.image}/>
+            <View style={styles.viewText}>
+              <Text style={styles.darkText}>{item.title}</Text>
+              <Text style={styles.darkText}>{item.author}</Text>
+              <Text style={styles.darkText}>{`${item.level} , ${item.released} , ${item.duration}`}</Text>
+            </View>
         </View>
       );
 }
 
 const styles = StyleSheet.create({
     container:{
-
+        margin: 5,
+        backgroundColor: '#fff',
+        alignContent: "center",
+        justifyContent: "center"
     },
-    searchbox:{
-        flex: 1, 
-        borderColor: 'gray', 
-        borderWidth: 1,
-        height: 40,
+    viewText:{
+      margin: 5
+    },
+    darkText:{
+      color: 'darkgray'
+    },
+    image: {
+      width: 300,
+      height: 200
     }
-})
+  })

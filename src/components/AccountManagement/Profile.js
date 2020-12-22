@@ -3,10 +3,9 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'reac
 
 export default function Profile() {
   const profile = [
-      username = 'vdkhoa7498',
+      username = 'admin',
       password = '123',
-      name = 'Vo Dang Khoa',
-      email = 'vdkhoa7498@gmail.com',
+      name = 'Administrator',
       age = 22,
       uriImage = '../../../../assets/login.png'
   ]

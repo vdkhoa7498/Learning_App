@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import SectionCoursesItem from '../SectionCoursesItem/section-courses-item';
 
+
 export default function SectionCourses(props) {
   const courses = [
       {
@@ -34,7 +35,7 @@ export default function SectionCourses(props) {
   ]
 
   const renderListItem = () =>{
-      return courses.map( item => <SectionCoursesItem item={item} navigation={props.navigation}/>);
+      return courses.map( item => <SectionCoursesItem navigation={props.navigation} item={item}/>);
       // return courses.map(Item => <SectionCoursesItem Item = {Item}/>);
   }
 
