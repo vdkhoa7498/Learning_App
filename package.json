@@ -13,6 +13,7 @@
     "@react-navigation/compat": "^5.3.9",
     "@react-navigation/native": "^5.8.9",
     "@react-navigation/stack": "^5.12.6",
+    "axios": "^0.21.1",
     "expo": "^39.0.0",
     "expo-status-bar": "~1.0.2",
     "native-base": "^2.13.14",

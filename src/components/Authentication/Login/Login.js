@@ -1,21 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
-import { loginServices } from '../../../core/services/authentication-services';
 import {ScreenKey} from '../../../globals/constants'
-
-export const AuthenticationContext = React.createContext();
+import {AuthenticationContext} from '../../../provider/authentication-provider'
 
 export default function Login(props) {
 
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [status, setStatus] = useState(null);
-  const [info, setInfo] = useState(null)
+  const authContext = useContext();
 
   useEffect(()=>{
-    if (status && status.status === 200){
+    if (authContext.isAuthenticated){
       props.navigation.navigate(ScreenKey.MainTabScreen)
-      setInfo(loginServices.info)
+      
+    } else{
+      console.log('login failed')
     }
   })
 
@@ -35,10 +34,10 @@ export default function Login(props) {
     <View style={styles.container}>
       <Image style ={styles.img} source = {require('../../../../assets/login.png')}/>
       <TextInput
-        onChangeText = {text => setUsername(text)}
+        onChangeText = {text => setEmail(text)}
         style = {styles.textInput}
-        placeholder = "User Name"
-        defaultValue = {username}
+        placeholder = "Email"
+        defaultValue = {email}
       />
       <TextInput
         onChangeText = {text => setPassword(text)}
@@ -50,7 +49,7 @@ export default function Login(props) {
       {renderLoginStatus(status)}
       <TouchableOpacity 
         onPress = {() =>{
-          setStatus(loginServices(username,password))
+          authContext.login(email, password)
         }}
         style = {styles.btn}>
         <Text style = {styles.btnText}>Login</Text>
