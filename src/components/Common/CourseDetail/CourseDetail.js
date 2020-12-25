@@ -7,11 +7,14 @@ export default function CoursesDetail(props){
     const item = props.route.params.item
     return (
         <View style={styles.container}>
-            <Image source={{uri: `${item.uri}`}} style={styles.image}/>
+            <Image source={{uri: `${item.imageUrl}`}} style={styles.image}/>
             <View style={styles.viewText}>
               <Text style={styles.darkText}>{item.title}</Text>
-              <Text style={styles.darkText}>{item.author}</Text>
-              <Text style={styles.darkText}>{`${item.level} , ${item.released} , ${item.duration}`}</Text>
+              <Text style={styles.darkText}>{item.subtitle}</Text>
+              <Text style={styles.darkText}>{item.price}</Text>
+              <Text style={styles.darkText}>{item.description}</Text>
+              <Text style={styles.darkText}>{item.learnWhat}</Text>
+              <Text style={styles.darkText}>{`${item.level} , ${item.released} , ${item.totalHours}`}</Text>
             </View>
         </View>
       );

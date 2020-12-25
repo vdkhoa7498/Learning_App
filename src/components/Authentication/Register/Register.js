@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
-
 import {ScreenKey} from '../../../globals/constants'
-import {AuthenticationContext} from '../../../provider/authentication-provider'
+import axios from 'axios'
 
 export default function Register() {
 
@@ -11,16 +10,38 @@ export default function Register() {
   const [inputPhone, setInputPhone] = useState("");
   const [inputPassword, setInputPassword] = useState("");
 
-  const authContext = useContext();
 
-  useEffect(()=>{
-    if (authContext.isAuthenticated){
-      props.navigation.navigate(ScreenKey.MainTabScreen)
-      
-    } else{
-      console.log('login failed')
-    }
-  })
+  var configRegister = {
+    method: 'post',
+    url: 'http://api.dev.letstudy.org/user/register',
+    headers: { 
+      'Content-Type': 'application/json', 
+    },
+    data: {
+      username: inputUsername,
+      email: inputEmail,
+      phone: inputPhone,
+      password: inputPassword}
+  };
+
+  const register = () => {
+    console.log("press register");
+    // store.dispatch({ type: 'SET_TOKEN', token: "1234" })
+    // console.log(store.getState());
+
+    axios(configRegister).then((response) =>{
+      if (response.status == 200){
+        // store.dispatch({ type: 'SET_TOKEN', token: response.data.token })
+        props.navigation.navigate(ScreenKey.LoginScreen)
+      } else{
+          console.log(response)
+      }
+    }).catch((error) =>{
+        console.log(error)
+    })
+
+    
+  };
 
   return (
     <View style={styles.container}>
@@ -28,10 +49,7 @@ export default function Register() {
       <TextInput
         style = {styles.textInput}
         placeholder = "User Name"
-        clear
-        autoFocus
-        type="text"
-        value={inputUsername}
+        defaultValue={inputUsername}
         onChange={value => {
           setInputUsername(value);
         }}
@@ -39,10 +57,7 @@ export default function Register() {
       <TextInput
         style = {styles.textInput}
         placeholder = "Email"
-        clear
-        type="email"
-        autoCompleteType="email"
-        value={inputEmail}
+        defaultValue={inputEmail}
         onChange={value => {
           setInputEmail(value);
         }}
@@ -50,10 +65,7 @@ export default function Register() {
       <TextInput
         style = {styles.textInput}
         placeholder = "Phone"
-        clear
-        type="number"
-        autoCompleteType="tel"
-        value={inputPhone}
+        defaultValue={inputPhone}
         onChange={value => {
           setInputPhone(value);
         }}
@@ -61,9 +73,10 @@ export default function Register() {
       <TextInput
         style = {styles.textInput}
         type="password"
-        value={inputPassword}
+        secureTextEntry
+        defaultValue={inputPassword}
         onChange={value => {setInputPassword}}
-        placeholder = "New Password"
+        placeholder = "Password"
       />
       {/* <TextInput
         style = {styles.textInput}
@@ -71,7 +84,7 @@ export default function Register() {
         placeholder = "Confirm Password"
       /> */}
       <TouchableOpacity 
-        onPress= {()=>{authContext.register(inputUsername,inputEmail, inputPhone, inputPassword)}}
+        onPress= {()=>{register()}}
         style = {styles.btn}>
         <Text style = {styles.btnText}>Register</Text>
       </TouchableOpacity>

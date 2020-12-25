@@ -4,11 +4,16 @@ export const ScreenKey = {
     TabListCourses : "tabListCourses",
     TabExplorer : "tabExplorer",
     ListCourses : "listCourses",
-    CoursesDetail : "coursesDetail",
     MainTabScreen : "mainTabScreen",
     SplashScreen : "splashScreen",
     LoginScreen : "loginScreen",
-    HomeStackScreen: "homeStackScreen"
+    RegisterScreen: "registerScreen",
+    VerifyPasswordScreen: "verifyPasswordScreen",
+    ForgetPasswordScreen: "forgetPasswordScreen",
+    HomeStackScreen: "homeStackScreen",
+    ProfileScreen: "profileScreen",
+    ListCourses: "listCourses",
+    CourseDetail: "courseDetail"
 }
 
 export const color = {

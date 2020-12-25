@@ -1,61 +1,96 @@
 import React, {useEffect, useState, useContext} from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, AsyncStorageStatic } from 'react-native';
 import {ScreenKey} from '../../../globals/constants'
-import {AuthenticationContext} from '../../../provider/authentication-provider'
+import axios from 'axios'
+import {store} from '../../../app/store'
 
 export default function Login(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const authContext = useContext();
+  const [status, setStatus] = useState('');
+  const [token, setToken] = useState();
 
-  useEffect(()=>{
-    if (authContext.isAuthenticated){
-      props.navigation.navigate(ScreenKey.MainTabScreen)
+  // useEffect(()=>{
+  //   console.log('auth Context:',authContext)
+  //   if (authContext.state.isAuthenticated){
+  //     props.navigation.navigate(ScreenKey.ProfileScreen,{
+  //       screen: ScreenKey.HomeStackScreen,
+  //       params: authContext.state.userInfo
+  //     })
       
-    } else{
-      console.log('login failed')
-    }
-  })
+  //   } else{
+  //     console.log('login failed')
+  //   }
+  // })
 
-  const renderLoginStatus = (status) =>{
-    if (!status){
-      return <View/>
-    } 
-    else if (status === 200){
-        return ( <Text>Login successed</Text> )
-      } 
-      else{
-        return( <Text>{status.errorString}</Text>)
+  var configLogin = {
+    method: 'post',
+    url: 'http://api.dev.letstudy.org/user/login',
+    headers: { 
+      'Content-Type': 'application/json', 
+    },
+    data: {
+      email: email,
+      password: password}
+  };
+
+  const login = () => {
+    console.log("press login");
+    // store.dispatch({ type: 'SET_TOKEN', token: "1234" })
+    // console.log(store.getState());
+
+    axios(configLogin).then((response) =>{
+      if (response.status == 200){
+        store.dispatch({ type: 'SET_TOKEN', token: response.data.token })
+        props.navigation.navigate(ScreenKey.MainTabScreen)
+      } else{
+          console.log(response.message)
       }
-  } 
+    }).catch((error) =>{
+      // if ()
+      // console.log(error.status);
+        setStatus("Login Failed");
+    })
+
+    
+  };
+
   return (
-    <AuthenticationContext.Provider value= {{info, setInfo}}>
+    <>
     <View style={styles.container}>
       <Image style ={styles.img} source = {require('../../../../assets/login.png')}/>
       <TextInput
-        onChangeText = {text => setEmail(text)}
+        onChangeText = {(text) => setEmail(text)}
         style = {styles.textInput}
         placeholder = "Email"
         defaultValue = {email}
       />
       <TextInput
-        onChangeText = {text => setPassword(text)}
+        onChangeText = {(text) => setPassword(text)}
         style = {styles.textInput}
         placeholder = "Password"
         secureTextEntry
         defaultValue = {password}
       />
-      {renderLoginStatus(status)}
+      <div>{status}</div>
       <TouchableOpacity 
         onPress = {() =>{
-          authContext.login(email, password)
+          // authContext.login(email, password)
+          login()
         }}
         style = {styles.btn}>
         <Text style = {styles.btnText}>Login</Text>
       </TouchableOpacity>
+      <TouchableOpacity 
+        onPress = {() =>{
+          props.navigation.navigate(ScreenKey.RegisterScreen)
+        }}
+        style = {styles.btn}>
+        <Text style = {styles.btnText}>Register</Text>
+      </TouchableOpacity>
     </View>
-    </AuthenticationContext.Provider>
+    </>
   );
 }
 

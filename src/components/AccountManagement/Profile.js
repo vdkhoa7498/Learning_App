@@ -10,35 +10,9 @@ export default function Profile() {
       uriImage = '../../../../assets/login.png'
   ]
 
-  const EditProfile = () =>{
-      retrun (
-        <View>
-          <TextInput
-          style = {styles.textInput}
-          placeholder = {profile.username}
-          />
-          <TextInput
-          style = {styles.textInput}
-          placeholder = {profile.password}
-          />
-          <TextInput
-          style = {styles.textInput}
-          placeholder = {profile.name}
-          />
-          <TextInput
-          style = {styles.textInput}
-          placeholder = {profile.email}
-          />
-          <TextInput
-          style = {styles.textInput}
-          placeholder = {profile.age}
-          />
-        </View>
-      );
-  }
   return (
     <View style={styles.container}>
-      <Image source = {require(`${profile.uriImage}`)}/>
+      {/* <Image source = {require(`${profile.uriImage}`)}/> */}
       <Text>Username: {profile.username}</Text>
       <Text>Password: {profile.password}</Text>
       <Text>Name: {profile.name}</Text>

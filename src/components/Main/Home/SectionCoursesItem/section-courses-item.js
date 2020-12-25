@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ScrollView } from 'react-native';
-import Course from '../../../Common/course'
+import Course from '../../../Common/ListCourses/course-item'
 import { createStackNavigator } from '@react-navigation/stack';
-import CoursesDetail from '../../../CourseDetail/CourseDetail'
+import CoursesDetail from '../../../Common/CourseDetail/CourseDetail'
 
 
 export default function SectionCoursesItem(props) {

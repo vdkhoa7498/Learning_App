@@ -1,39 +1,31 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import {Text, View, StyleSheet, Image} from 'react-native'
 import { ScreenKey } from '../../globals/constants';
 
-class SplashScreen extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {loading:0}
-    }
+export default function SplashScreen (props){
 
-    componentDidMount (){
-        this.timer = setInterval(() =>{
-            const newLoadingValue = this.state.loading +1;
-            this.setState({loading: newLoadingValue})
-        }, 100);
-    }
+    const [loading, setLoanding] = useState(0)
 
-   
-    componentDidUpdate(){
-        if (this.state.loading >= 100){
-            clearInterval(this.timer)
-            this.props.navigation.navigate(ScreenKey.LoginScreen)
+    useEffect(() => {
+        setInterval =() =>{
+            
         }
-    }
+        if (loading >= 100){
+            // clearInterval(this.timer)
+            props.navigation.navigate(ScreenKey.LoginScreen)
+        } else{
+            setTimeout ( setLoanding(loading+1), 100 );
+            // setLoanding(loading+1)
+        }
+        console.log("useEffect");
+    });
 
-    componentWillUnmount(){
-        clearInterval(this.timer)
-    }
-    render(){
-        return (
-            <View style = {styles.container}>
-                <Image style ={styles.img} source = {require('../../../assets/logo.png')}/>
-                <Text style= {styles.text}>Loading... {`${this.state.loading}`} </Text>
-            </View>
-        )
-    }
+    return (
+        <View style = {styles.container}>
+            <Image style ={styles.img} source = {require('../../../assets/logo.png')}/>
+            <Text style= {styles.text}>Loading... {`${loading}`} </Text>
+        </View>
+    )
     
 }
 
@@ -53,5 +45,3 @@ const styles = StyleSheet.create({
         alignItems: "center"
     }
 })
-
-export default SplashScreen

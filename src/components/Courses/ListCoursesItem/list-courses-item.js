@@ -1,10 +1,12 @@
 import React from'react';
 import {View, Text, Image, TouchableOpacity, Alert, StyleSheet} from 'react-native';
-import Course from '../../Common/course'
+import { ScreenKey } from "../../../globals/constants";
+import Course from '../../Common/ListCourses/course-item'
 
 export default function ListCoursesItem(props){
   const onPress = () =>{
-    props.navigation.push("CoursesDetail", {item: props.item})
+    console.log("click")
+    // props.navigation.navigate(ScreenKey.CourseDetail, {item: props.item})
   }
 
 
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
         height: 200,
         backgroundColor: 'lightgray',
         flex:1,
-        flexDirection: 'column'
+        flexDirection: 'row'
     },
     viewText:{
       margin: 5,

@@ -1,8 +1,10 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
 import SectionCourses from '../Home/SectionCourses/section-courses'
-import CoursesDetail from '../../CourseDetail/CourseDetail'
+import ListCourses from '../../Common/ListCourses/list-courses'
 import ImageButton from '../../Common/image-button'
+import axios from 'axios'
+import {ScreenKey} from '../../../globals/constants'
 
 export default function Browse(props) {
 
@@ -10,13 +12,26 @@ export default function Browse(props) {
     console.log('Pressed on New Releases')
   }
 
+  const onPressTopSell = () =>{
+    axios.post('http://api.dev.letstudy.org/course/top-sell',{
+      "limit": 10,
+      "page": 1
+    }). then((response) =>{
+      {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
+      // <ListCourses courses = {response.data.payload}/>
+      console.log(response.data.payload)
+    }).catch((error) =>{
+      console.log(error)
+    })
+  }
+
   return (
     <ScrollView>
-      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='NEW REALESE' onPress={onPressNewReleases()}/>
-      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
+      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='NEW REALESE' onPress={onPressNewReleases}/>
+      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='RECOMMENDED FOR YOU' onPress={onPressNewReleases}/>
       <ScrollView horizontal = {true}>
           <View>
-            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='CONFERENCES' onPress={onPressNewReleases()}/>
+            <ImageButton image="https://guildit.org/wp-content/uploads/2020/04/sell-online-hero.png" title='TOP SELL' onPress={onPressTopSell}/>
             <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='CERTIFICATIONS' onPress={onPressNewReleases()}/>
           </View>
           <View>
@@ -36,10 +51,10 @@ export default function Browse(props) {
             <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
           </View>
       </ScrollView>
-      <SectionCourses navigation={props.navigation} title='Continue learning'/>
+      {/* <SectionCourses navigation={props.navigation} title='Continue learning'/>
       <SectionCourses navigation={props.navigation} title='Path'/>
       <SectionCourses navigation={props.navigation} title='Channel'/>
-      <SectionCourses navigation={props.navigation} title='Bookmarks'/>
+      <SectionCourses navigation={props.navigation} title='Bookmarks'/> */}
     </ScrollView>
   );
 }

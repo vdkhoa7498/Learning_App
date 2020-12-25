@@ -13,11 +13,13 @@ export default function Course(props){
     return (
         <View style={styles.item}>
           <TouchableOpacity onPress={onPress}>
-            <Image source={{uri: `${props.item.uri}`}} style={styles.image}/>
+            <Image style={styles.image} source={{uri: `${props.item.imageUrl}`}}/>
             <View style={styles.viewText}>
               <Text style={styles.darkText}>{props.item.title}</Text>
-              <Text style={styles.darkText}>{props.item.author}</Text>
+              <Text style={styles.darkText}>{props.item.subtitle}</Text>
+              <Text style={styles.darkText}>{props.item.description}</Text>
               <Text style={styles.darkText}>{`${props.item.level} , ${props.item.released} , ${props.item.duration}`}</Text>
+              <Text>{props.item.subtitle}</Text>
             </View>
           </TouchableOpacity>
             
@@ -28,7 +30,6 @@ export default function Course(props){
 const styles = StyleSheet.create({
     item:{
         margin: 5,
-        width: 200,
         height: 200,
         backgroundColor: 'lightgray',
     },
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
       color: 'darkgray'
     },
     image: {
-      height: 100
+      height: 100,
+      width: 100
     }
   })
