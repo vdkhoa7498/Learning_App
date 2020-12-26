@@ -6,10 +6,8 @@ export default function Home(props) {
 
   return (
     <ScrollView>
-      <SectionCourses navigation={props.navigation} title='Continue learning'/>
-      <SectionCourses navigation={props.navigation} title='Path'/>
-      <SectionCourses navigation={props.navigation} title='Channel'/>
-      <SectionCourses navigation={props.navigation} title='Bookmarks'/>
+      <SectionCourses route="/user/get-process-courses" navigation={props.navigation} title='Khoá học của tôi'/>
+      <SectionCourses route="/user/get-favorite-courses" navigation={props.navigation} title='Khoá học yêu thích của tôi'/>
     </ScrollView>
   );
 }

@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
+import React,{useEffect, useState} from 'react';
+import { StyleSheet, ScrollView, View, TouchableOpacity, Text, Image } from 'react-native';
 import SectionCourses from '../Home/SectionCourses/section-courses'
 import ListCourses from '../../Common/ListCourses/list-courses'
 import ImageButton from '../../Common/image-button'
@@ -9,13 +9,34 @@ import {userInfoStore} from '../../../app/store'
 
 export default function Browse(props) {
 
+  const [instructors, setInstructors] = useState([]);
   const idUser = userInfoStore.getState().id;
+
+  useEffect(()=>{
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = "";
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("http://api.dev.letstudy.org/instructor", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        setInstructors(JSON.parse(result).payload);
+      })
+      .catch(error => console.log('error', error));
+  })
   const onPressRecommend = () => {
     axios.get(`http://api.dev.letstudy.org/user/recommend-course/${idUser}/10/1`)
     .then((response) =>{
       {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
       <ListCourses courses = {response.data.payload}/>
-      console.log(response.data.payload)
     }).catch((error) =>{
       console.log(error)
     })
@@ -27,8 +48,6 @@ export default function Browse(props) {
       "page": 1
     }). then((response) =>{
       {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
-      <ListCourses courses = {response.data.payload}/>
-      console.log(response.data.payload)
     }).catch((error) =>{
       console.log(error)
     })
@@ -40,8 +59,6 @@ export default function Browse(props) {
       "page": 1
     }). then((response) =>{
       {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
-      <ListCourses courses = {response.data.payload}/>
-      console.log(response.data.payload)
     }).catch((error) =>{
       console.log(error)
     })
@@ -53,11 +70,33 @@ export default function Browse(props) {
       "page": 1
     }). then((response) =>{
       {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
-      <ListCourses courses = {response.data.payload}/>
-      console.log(response.data.payload)
+      // <ListCourses courses = {response.data.payload}/>
     }).catch((error) =>{
       console.log(error)
     })
+  }
+
+  const renderListInstructor = () =>{
+    
+    return instructors.map( (item, index) => 
+      <TouchableOpacity 
+        key={index}
+        style={styles.instructorBtn}
+        onPress = {() =>{
+          console.log("press");
+          props.navigation.navigate(ScreenKey.InstructorInfoScreen, {data: item});
+        }}>
+        <Image
+          style={styles.avatar}
+          source={{
+            uri: item["user.avatar"],
+          }}
+        />
+        <Text style={styles.instructorTxt}>{item["user.name"]}</Text>
+      </TouchableOpacity>
+      // <SectionCoursesItem key ={index} navigation={props.navigation} item={item}/>
+      );
+      // return courses.map(Item => <SectionCoursesItem Item = {Item}/>);
   }
 
   return (
@@ -66,32 +105,13 @@ export default function Browse(props) {
       <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='TOP SELL' onPress={onPressTopSell}/>
       <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='TOP RATE' onPress={onPressTopRate}/>
       <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='RECOMMENDED FOR YOU' onPress={onPressRecommend}/>
-      {/* <ScrollView horizontal = {true}>
-          <View>
-            <ImageButton image="https://guildit.org/wp-content/uploads/2020/04/sell-online-hero.png" title='TOP SELL' onPress={onPressTopSell}/>
-            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='CERTIFICATIONS' onPress={onPressNewReleases()}/>
-          </View>
-          <View>
-            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='<Software> DEVELOPMENT' onPress={onPressNewReleases()}/>
-            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='IT' onPress={onPressNewReleases()}/>
-          </View>
-          <View>
-            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='Information and CYBER SECURITY' onPress={onPressNewReleases()}/>
-            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='DATA PROFESSIONAL' onPress={onPressNewReleases()}/>
-          </View>
-          <View>
-            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='BUSINESS PROFESSIONAL' onPress={onPressNewReleases()}/>
-            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='Creative PROFESSIONAL' onPress={onPressNewReleases()}/>
-          </View>
-          <View>
-            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='NEW REALESE' onPress={onPressNewReleases()}/>
-            <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
-          </View>
-      </ScrollView> */}
-      {/* <SectionCourses navigation={props.navigation} title='Continue learning'/>
-      <SectionCourses navigation={props.navigation} title='Path'/>
-      <SectionCourses navigation={props.navigation} title='Channel'/>
-      <SectionCourses navigation={props.navigation} title='Bookmarks'/> */}
+      
+      <View>
+        <Text style={styles.title}>Top Instructor</Text>
+        <ScrollView horizontal = {true}>
+            {renderListInstructor()}
+        </ScrollView>
+      </View>
     </ScrollView>
   );
 }
@@ -106,5 +126,28 @@ const styles = StyleSheet.create({
   imagebtnsmall:{
       margin: 2,
       width: 200
+  },
+  instructorBtn: {
+    height:300,
+    margin: 20
+  },
+  instructorTxt:{
+    color: "#fff",
+    fontWeight: 'bold',
+    backgroundColor: "#252e53",
+    borderRadius: 10,
+    textAlign: 'center'
+  },
+  avatar:{
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10
+  },
+  title: {
+    marginTop: 30,
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: "#000"
   }
 });

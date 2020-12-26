@@ -6,7 +6,7 @@ import CourseItem from './course-item';
 export default function SectionCourses(props) {
   
   const renderListItem = () =>{
-      return props.route.params.data.map( item => <CourseItem navigation={props.navigation} item={item}/>);
+      return props.route.params.data.map( (item, index) => <CourseItem key={index} navigation={props.navigation} item={item}/>);
     // console.log(props.route.params.data)
       // return courses.map(Item => <SectionCoursesItem Item = {Item}/>);
   }

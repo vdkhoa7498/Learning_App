@@ -15,6 +15,7 @@ import Profile from './src/components/AccountManagement/Profile'
 import UpdateInfo from "./src/components/AccountManagement/UpdateInfo";
 import ChangePassword from "./src/components/AccountManagement/ChangePassword";
 import ChangeEmail from './src/components/AccountManagement/ChangeEmail'
+import InstructorInfo from './src/components/Main/Browse/InstructorInfo'
 import {ScreenKey} from './src/globals/constants'
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -33,7 +34,6 @@ const DownloadsStack = createStackNavigator();
 const BrowseStack = createStackNavigator();
 const infoButton = () =>{
   RootNavigation.navigate(ScreenKey.ProfileScreen)
-  console.log('okela')
 }
 
 const HomeStackScreen = () =>(
@@ -194,6 +194,11 @@ const MainStackNavigation =() => (
       name = {ScreenKey.ChangeEmailScreen}
       component = {ChangeEmail}
       options = {{title:"Change Email"}}
+    />
+    <MainStack.Screen
+      name = {ScreenKey.InstructorInfoScreen}
+      component = {InstructorInfo}
+      options = {{title:"Instructor Info"}}
     />
   </MainStack.Navigator>
 )

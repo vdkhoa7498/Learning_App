@@ -15,6 +15,7 @@ export const ScreenKey = {
     UpdateInfoScreen: "UpdateInfoScreen",
     ChangePasswordScreen: "ChangePasswordScreen",
     ChangeEmailScreen: "ChangeEmailScreen",
+    InstructorInfoScreen: "InstructorInfoScreen",
     ListCourses: "listCourses",
     CourseDetail: "courseDetail"
 }
