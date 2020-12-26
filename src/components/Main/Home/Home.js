@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
-import ListCourses from '../../Courses/ListCourses/list-courses'
 
 export default function Home(props) {
 

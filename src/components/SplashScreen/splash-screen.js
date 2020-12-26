@@ -7,15 +7,12 @@ export default function SplashScreen (props){
     const [loading, setLoanding] = useState(0)
 
     useEffect(() => {
-        setInterval =() =>{
-            
-        }
+       
         if (loading >= 100){
             // clearInterval(this.timer)
             props.navigation.navigate(ScreenKey.LoginScreen)
         } else{
-            setTimeout ( setLoanding(loading+1), 100 );
-            // setLoanding(loading+1)
+            setLoanding(loading+1)
         }
         console.log("useEffect");
     });

@@ -18,7 +18,33 @@ export default function Browse(props) {
       "page": 1
     }). then((response) =>{
       {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
-      // <ListCourses courses = {response.data.payload}/>
+      <ListCourses courses = {response.data.payload}/>
+      console.log(response.data.payload)
+    }).catch((error) =>{
+      console.log(error)
+    })
+  }
+
+  const onPressTopNew = () =>{
+    axios.post('http://api.dev.letstudy.org/course/top-new',{
+      "limit": 10,
+      "page": 1
+    }). then((response) =>{
+      {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
+      <ListCourses courses = {response.data.payload}/>
+      console.log(response.data.payload)
+    }).catch((error) =>{
+      console.log(error)
+    })
+  }
+
+  const onPressTopRate = () =>{
+    axios.post('http://api.dev.letstudy.org/course/top-rate',{
+      "limit": 10,
+      "page": 1
+    }). then((response) =>{
+      {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
+      <ListCourses courses = {response.data.payload}/>
       console.log(response.data.payload)
     }).catch((error) =>{
       console.log(error)
@@ -27,9 +53,11 @@ export default function Browse(props) {
 
   return (
     <ScrollView>
-      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='NEW REALESE' onPress={onPressNewReleases}/>
+      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='TOP NEW' onPress={onPressTopNew}/>
+      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='TOP SELL' onPress={onPressTopSell}/>
+      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='TOP RATE' onPress={onPressTopRate}/>
       <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='RECOMMENDED FOR YOU' onPress={onPressNewReleases}/>
-      <ScrollView horizontal = {true}>
+      {/* <ScrollView horizontal = {true}>
           <View>
             <ImageButton image="https://guildit.org/wp-content/uploads/2020/04/sell-online-hero.png" title='TOP SELL' onPress={onPressTopSell}/>
             <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='CERTIFICATIONS' onPress={onPressNewReleases()}/>
@@ -50,7 +78,7 @@ export default function Browse(props) {
             <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='NEW REALESE' onPress={onPressNewReleases()}/>
             <ImageButton image="https://image.shutterstock.com/image-photo/wet-asphalt-reflection-neon-lights-260nw-1356837434.jpg" title='RECOMMENDED FOR YOU' onPress={onPressNewReleases()}/>
           </View>
-      </ScrollView>
+      </ScrollView> */}
       {/* <SectionCourses navigation={props.navigation} title='Continue learning'/>
       <SectionCourses navigation={props.navigation} title='Path'/>
       <SectionCourses navigation={props.navigation} title='Channel'/>

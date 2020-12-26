@@ -1,30 +1,18 @@
-import React, {useEffect, useState, useContext} from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image, AsyncStorageStatic } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import {ScreenKey} from '../../../globals/constants'
+import * as RootNavigation from '../../../../RootNavigation';
 import axios from 'axios'
-import {store} from '../../../app/store'
+import {tokenStore, userInfoStore} from '../../../app/store'
 
 export default function Login(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('');
-  const [token, setToken] = useState();
 
-  // useEffect(()=>{
-  //   console.log('auth Context:',authContext)
-  //   if (authContext.state.isAuthenticated){
-  //     props.navigation.navigate(ScreenKey.ProfileScreen,{
-  //       screen: ScreenKey.HomeStackScreen,
-  //       params: authContext.state.userInfo
-  //     })
-      
-  //   } else{
-  //     console.log('login failed')
-  //   }
-  // })
 
-  var configLogin = {
+  const configLogin = {
     method: 'post',
     url: 'http://api.dev.letstudy.org/user/login',
     headers: { 
@@ -36,13 +24,11 @@ export default function Login(props) {
   };
 
   const login = () => {
-    console.log("press login");
-    // store.dispatch({ type: 'SET_TOKEN', token: "1234" })
-    // console.log(store.getState());
-
     axios(configLogin).then((response) =>{
       if (response.status == 200){
-        store.dispatch({ type: 'SET_TOKEN', token: response.data.token })
+
+        tokenStore.dispatch({ type: 'SET_TOKEN', token: response.data.token })
+        userInfoStore.dispatch({ type: 'SET_INFO', info: response.data.userInfo })
         props.navigation.navigate(ScreenKey.MainTabScreen)
       } else{
           console.log(response.message)
@@ -52,8 +38,6 @@ export default function Login(props) {
       // console.log(error.status);
         setStatus("Login Failed");
     })
-
-    
   };
 
   return (
@@ -73,22 +57,21 @@ export default function Login(props) {
         secureTextEntry
         defaultValue = {password}
       />
-      <div>{status}</div>
+      <Text>{status}</Text>
       <TouchableOpacity 
-        onPress = {() =>{
-          // authContext.login(email, password)
-          login()
-        }}
+        onPress = {login}
         style = {styles.btn}>
         <Text style = {styles.btnText}>Login</Text>
       </TouchableOpacity>
+      <Text style={styles.linkText}>You don't have account? 
       <TouchableOpacity 
-        onPress = {() =>{
-          props.navigation.navigate(ScreenKey.RegisterScreen)
-        }}
-        style = {styles.btn}>
-        <Text style = {styles.btnText}>Register</Text>
-      </TouchableOpacity>
+          style={styles.linkText}
+          onPress = {() =>{
+            RootNavigation.navigate(ScreenKey.RegisterScreen)
+          }}>
+          <Text style={{color: "blue", marginLeft: 10}}>Register</Text>
+        </TouchableOpacity>
+      </Text>
     </View>
     </>
   );
@@ -115,6 +98,9 @@ const styles = StyleSheet.create({
     width: 300,
     backgroundColor: "#0061BD",
     alignItems: "center"
+  },
+  linkText: {
+    marginTop:10,
   },
   btnText:{
     justifyContent: "center",

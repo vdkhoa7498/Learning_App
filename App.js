@@ -1,6 +1,8 @@
 import React from 'react';
-import {  } from 'react-native';
+import { Button, StyleSheet, TouchableOpacity } from 'react-native';
 import 'react-native-gesture-handler'
+import { navigationRef } from './RootNavigation';
+import * as RootNavigation from'./RootNavigation';
 import Home from './src/components/Main/Home/Home'
 import Browse from './src/components/Main/Browse/Browse'
 import Search from './src/components/Main/Search/Search'
@@ -10,6 +12,7 @@ import SplashScreen from './src/components/SplashScreen/splash-screen'
 import Login from './src/components/Authentication/Login/Login'
 import Register from './src/components/Authentication/Register/Register'
 import Profile from './src/components/AccountManagement/Profile'
+import UpdateInfo from "./src/components/AccountManagement/UpdateInfo";
 import {ScreenKey} from './src/globals/constants'
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -26,17 +29,37 @@ const HomeStack = createStackNavigator();
 const MainStack = createStackNavigator();
 const DownloadsStack = createStackNavigator();
 const BrowseStack = createStackNavigator();
+const infoButton = () =>{
+  RootNavigation.navigate(ScreenKey.ProfileScreen)
+  console.log('okela')
+}
 
 const HomeStackScreen = () =>(
   <HomeStack.Navigator>
-    <HomeStack.Screen name="Home" component={Home} options = {{headerShown: false}}/>
+    <HomeStack.Screen 
+      name="Home" 
+      component={Home} 
+      options = {{headerRight: () => (
+        <TouchableOpacity onPress={infoButton} >
+          <MaterialCommunityIcons name="account-circle" color={"#000"} size={26} />
+      </TouchableOpacity>
+      )}}/>
     <HomeStack.Screen name={ScreenKey.CourseDetail} component={CourseDetail}/>
+    {/* <HomeStack.Screen name={ScreenKey.ProfileScreen} component={Profile} options={{title:"Profile"}}/> */}
   </HomeStack.Navigator>
 );
 
 const BrowseStackScreen = () => (
   <BrowseStack.Navigator>
-    <BrowseStack.Screen name="Browse" component={Browse} options = {{headerShown: false}}/>
+    <BrowseStack.Screen 
+      name="Browse" 
+      component={Browse} 
+      options = {{headerRight: () => (
+        <TouchableOpacity onPress={infoButton} >
+          <MaterialCommunityIcons name="account-circle" color={"#000"} size={26} />
+      </TouchableOpacity>
+      )}}/>
+    {/* <BrowseStack.Screen name={ScreenKey.ProfileScreen} component={Profile}/> */}
     <BrowseStack.Screen name={ScreenKey.ListCourses} component={ListCourses}/>
     <BrowseStack.Screen name={ScreenKey.CourseDetail} component={CourseDetail}/>
   </BrowseStack.Navigator>
@@ -44,7 +67,14 @@ const BrowseStackScreen = () => (
 
 const DownloadsStackScreen = () => (
   <DownloadsStack.Navigator>
-    <DownloadsStack.Screen name="Downloads" component={Downloads} options = {{headerShown: false}}/>
+    <DownloadsStack.Screen 
+      name="Downloads" 
+      component={Downloads} 
+      options = {{headerRight: () => (
+        <TouchableOpacity onPress={infoButton} >
+          <MaterialCommunityIcons name="account-circle" color={"#000"} size={26} />
+      </TouchableOpacity>
+      )}}/>
   </DownloadsStack.Navigator>
 );
 
@@ -59,7 +89,13 @@ const MainTabNavigator = () =>(
       name="Home" 
       component={HomeStackScreen} 
       options={{
-        headerShown: false,
+        headerRight: () => (
+          <Button
+            onPress={() => alert('This is a button!')}
+            title="Info"
+            color="#fff"
+          />
+        ),
         tabBarLabel: 'Home',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="home" color={color} size={26} />
@@ -70,7 +106,13 @@ const MainTabNavigator = () =>(
       name="Downloads"
       component={DownloadsStackScreen}
       options={{
-        headerShown: false,
+        headerRight: () => (
+          <Button
+            onPress={() => alert('This is a button!')}
+            title="Info"
+            color="#fff"
+          />
+        ),
         tabBarLabel: 'Downloads',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="arrow-collapse-down" color={color} size={26} />
@@ -81,7 +123,13 @@ const MainTabNavigator = () =>(
       name="Browse" 
       component={BrowseStackScreen} 
       options={{
-        headerShown: false,
+        headerRight: () => (
+          <Button
+            onPress={() => alert('This is a button!')}
+            title="Info"
+            color="#fff"
+          />
+        ),
         tabBarLabel: 'Browse',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="grid" color={color} size={26} />
@@ -123,20 +171,45 @@ const MainStackNavigation =() => (
     <MainStack.Screen
       name = {ScreenKey.ProfileScreen}
       component = {Profile}
-      options = {{headerShown: false}}
+      options = {{title:"Profile"}}
     />
     <MainStack.Screen
       name = {ScreenKey.RegisterScreen}
       component = {Register}
       options = {{headerShown: false}}
     />
+    <MainStack.Screen
+      name = {ScreenKey.UpdateInfoScreen}
+      component = {UpdateInfo}
+      options = {{title:"Update Information"}}
+    />
   </MainStack.Navigator>
 )
 
 export default function App() {
   return (
-    <NavigationContainer>
+    
+    <NavigationContainer ref={navigationRef}>
       <MainStackNavigation/>
     </NavigationContainer>
   );
 }
+
+
+const styles = StyleSheet.create({
+  button: {
+      height: 100,
+      borderRadius: 50,
+      margin: 5,
+  },
+  touch:{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+  },
+  title:{
+      fontSize: 24,
+      color: 'white',
+      fontWeight: 'bold'
+  }
+})
