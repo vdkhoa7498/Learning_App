@@ -1,13 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
+import {ScreenKey} from '../../../../globals/constants'
 import * as RootNavigation from '../../../../../RootNavigation'
 
 export default function SectionCoursesItem(props) {
   
   // console.log("section-item")
   const onPress = () =>{
-    // RootNavigation.navigate(ScreenKey.CourseDetail, {item: props.item})
-    console.log(props)
+    RootNavigation.navigate(ScreenKey.CourseDetail, {item: props.item.id})
+    // console.log(props)
   }
   return (
     <View style={styles.item}>

@@ -16,6 +16,8 @@ import UpdateInfo from "./src/components/AccountManagement/UpdateInfo";
 import ChangePassword from "./src/components/AccountManagement/ChangePassword";
 import ChangeEmail from './src/components/AccountManagement/ChangeEmail'
 import InstructorInfo from './src/components/Main/Browse/InstructorInfo'
+import RegisterCourse from './src/components/Common/Course/RegisterCourse'
+import LearnCourse from './src/components/Common/Course/LearnCourse'
 import {ScreenKey} from './src/globals/constants'
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -199,6 +201,16 @@ const MainStackNavigation =() => (
       name = {ScreenKey.InstructorInfoScreen}
       component = {InstructorInfo}
       options = {{title:"Instructor Info"}}
+    />
+    <MainStack.Screen
+      name = {ScreenKey.LearnCourseScreen}
+      component = {LearnCourse}
+      options = {{title:"Learn Course"}}
+    />
+    <MainStack.Screen
+      name = {ScreenKey.RegisterCourseScreen}
+      component = {RegisterCourse}
+      options = {{title:"Register Course"}}
     />
   </MainStack.Navigator>
 )

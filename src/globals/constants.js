@@ -17,7 +17,9 @@ export const ScreenKey = {
     ChangeEmailScreen: "ChangeEmailScreen",
     InstructorInfoScreen: "InstructorInfoScreen",
     ListCourses: "listCourses",
-    CourseDetail: "courseDetail"
+    CourseDetail: "courseDetail",
+    RegisterCourseScreen: "RegisterCourseScreen",
+    LearnCourseScreen: "LearnCourseScreen"
 }
 
 export const color = {
