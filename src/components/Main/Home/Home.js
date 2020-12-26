@@ -1,11 +1,15 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
+import SectionCourses from './SectionCourses/section-courses'
 
 export default function Home(props) {
 
   return (
     <ScrollView>
-      {/* <ListCourses navigation={props.navigation} courses= {courses}/> */}
+      <SectionCourses navigation={props.navigation} title='Continue learning'/>
+      <SectionCourses navigation={props.navigation} title='Path'/>
+      <SectionCourses navigation={props.navigation} title='Channel'/>
+      <SectionCourses navigation={props.navigation} title='Bookmarks'/>
     </ScrollView>
   );
 }

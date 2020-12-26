@@ -1,13 +1,13 @@
 import React from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import * as RootNavigation from '../../../../RootNavigation'
+import {ScreenKey} from '../../../globals/constants'
 
 
 
 export default function Course(props){
   const onPress = () =>{
-    props.navigation.push("CoursesDetail", {item: props.item})
+    RootNavigation.navigate(ScreenKey.CourseDetail, {item: props.item})
   }
 
     return (

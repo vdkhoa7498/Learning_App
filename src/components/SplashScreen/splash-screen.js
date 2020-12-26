@@ -8,19 +8,22 @@ export default function SplashScreen (props){
 
     useEffect(() => {
        
-        if (loading >= 100){
-            // clearInterval(this.timer)
+        // if (loading >= 100){
+        //     // clearInterval(this.timer)
+        //     props.navigation.navigate(ScreenKey.LoginScreen)
+        // } else{
+        //     setLoanding(loading+1)
+        // }
+        // console.log("useEffect");
+        setTimeout(() => {
             props.navigation.navigate(ScreenKey.LoginScreen)
-        } else{
-            setLoanding(loading+1)
-        }
-        console.log("useEffect");
+        }, 300);
     });
 
     return (
         <View style = {styles.container}>
             <Image style ={styles.img} source = {require('../../../assets/logo.png')}/>
-            <Text style= {styles.text}>Loading... {`${loading}`} </Text>
+            <Text style= {styles.text}>Loading...  </Text>
         </View>
     )
     

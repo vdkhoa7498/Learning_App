@@ -6,7 +6,7 @@ import SectionCoursesItem from '../SectionCoursesItem/section-courses-item';
 export default function SectionCourses(props) {
   
   const renderListItem = () =>{
-      return porps.courses.map( item => <SectionCoursesItem navigation={props.navigation} item={item}/>);
+      // return porps.courses.map( item => <SectionCoursesItem navigation={props.navigation} item={item}/>);
       // return courses.map(Item => <SectionCoursesItem Item = {Item}/>);
   }
 

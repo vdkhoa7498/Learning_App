@@ -13,6 +13,8 @@ import Login from './src/components/Authentication/Login/Login'
 import Register from './src/components/Authentication/Register/Register'
 import Profile from './src/components/AccountManagement/Profile'
 import UpdateInfo from "./src/components/AccountManagement/UpdateInfo";
+import ChangePassword from "./src/components/AccountManagement/ChangePassword";
+import ChangeEmail from './src/components/AccountManagement/ChangeEmail'
 import {ScreenKey} from './src/globals/constants'
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -182,6 +184,16 @@ const MainStackNavigation =() => (
       name = {ScreenKey.UpdateInfoScreen}
       component = {UpdateInfo}
       options = {{title:"Update Information"}}
+    />
+    <MainStack.Screen
+      name = {ScreenKey.ChangePasswordScreen}
+      component = {ChangePassword}
+      options = {{title:"Change Password"}}
+    />
+    <MainStack.Screen
+      name = {ScreenKey.ChangeEmailScreen}
+      component = {ChangeEmail}
+      options = {{title:"Change Email"}}
     />
   </MainStack.Navigator>
 )

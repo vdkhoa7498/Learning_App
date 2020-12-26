@@ -11,33 +11,49 @@ export default function Login(props) {
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('');
 
-
-  const configLogin = {
-    method: 'post',
-    url: 'http://api.dev.letstudy.org/user/login',
-    headers: { 
-      'Content-Type': 'application/json', 
-    },
-    data: {
-      email: email,
-      password: password}
-  };
-
   const login = () => {
-    axios(configLogin).then((response) =>{
-      if (response.status == 200){
 
-        tokenStore.dispatch({ type: 'SET_TOKEN', token: response.data.token })
-        userInfoStore.dispatch({ type: 'SET_INFO', info: response.data.userInfo })
-        props.navigation.navigate(ScreenKey.MainTabScreen)
-      } else{
-          console.log(response.message)
-      }
-    }).catch((error) =>{
-      // if ()
-      // console.log(error.status);
-        setStatus("Login Failed");
-    })
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({"email":String(email),"password":String(password)});
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("http://api.dev.letstudy.org/user/login", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        let message = JSON.parse(result).message;
+        if (message=="OK"){
+          tokenStore.dispatch({ type: 'SET_TOKEN', token: JSON.parse(result).token })
+          userInfoStore.dispatch({ type: 'SET_INFO', info: JSON.parse(result).userInfo })
+          props.navigation.navigate(ScreenKey.MainTabScreen)
+        } else{
+          setStatus(message);
+        }
+        
+        console.log(result)})
+      .catch(error => console.log('error', error));
+
+    // axios(configLogin).then((response) =>{
+    //   if (response.status == 200){
+
+    //     tokenStore.dispatch({ type: 'SET_TOKEN', token: response.data.token })
+    //     userInfoStore.dispatch({ type: 'SET_INFO', info: response.data.userInfo })
+    //     props.navigation.navigate(ScreenKey.MainTabScreen)
+    //   } else{
+    //       console.log(response.message)
+    //   }
+    // }).catch((error) =>{
+    //   // if ()
+    //   // console.log(error.status);
+    //     setStatus("Login Failed");
+    // })
   };
 
   return (

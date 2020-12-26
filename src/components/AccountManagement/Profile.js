@@ -30,7 +30,6 @@ export default function Profile() {
       setEmail(response.data.payload.email);
       setPhone(response.data.payload.phone);
       setType(response.data.payload.type);
-      console.log(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -53,6 +52,16 @@ export default function Profile() {
         onPress={()=>{RootNavigation.navigate(ScreenKey.UpdateInfoScreen,{name: name, avatar: avatar, phone: phone, setName: setName, setPhone:setPhone, setAvatar: setAvatar})}}
         style = {styles.btn}>
         <Text style = {styles.btnText}>Edit Profile</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        onPress={()=>{RootNavigation.navigate(ScreenKey.ChangePasswordScreen)}}
+        style = {styles.btn}>
+        <Text style = {styles.btnText}>Change Password</Text>
+      </TouchableOpacity>
+      <TouchableOpacity 
+        onPress={()=>{RootNavigation.navigate(ScreenKey.ChangeEmailScreen)}}
+        style = {styles.btn}>
+        <Text style = {styles.btnText}>Change Email</Text>
       </TouchableOpacity>
     </View>
   );
@@ -88,5 +97,10 @@ const styles = StyleSheet.create({
     width: 300,
     backgroundColor: "#0061BD",
     alignItems: "center"
-  }
+  },
+  btnText:{
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#fff"
+  },
 });

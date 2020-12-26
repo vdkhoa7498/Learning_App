@@ -4,33 +4,38 @@ import {ScreenKey} from '../../globals/constants'
 import {tokenStore, userInfoStore} from '../../app/store'
 import * as RootNavigation from '../../../RootNavigation';
 
-export default function changePassword() {
+export default function ChangeEmail() {
 
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const [newEmail, setNewEmail] = useState("");
   const [status, setStatus] = useState("");
   
   const userInfo = userInfoStore.getState();
   const token = tokenStore.getState();
 
-  const changePassword = () =>{
+  const changeEmailButton = () =>{
 
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + token);
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({"id":String(userInfo.id),"oldPass":String(currentPassword),"newPass":String(newPassword)});
+    var raw = JSON.stringify({"newEmail":String(newEmail)});
 
     var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
+      method: 'PUT',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
     };
-
-    fetch("http://api.dev.letstudy.org/user/change-password", requestOptions)
+    
+    fetch("http://api.dev.letstudy.org/user/change-user-email", requestOptions)
     .then(response => response.text())
-    .then(result => {setStatus(JSON.parse(result).message); console.log(JSON.parse(result).message)})
+    .then(result => {
+      let message = JSON.parse(result).message;
+      if (message=="OK"){
+        setStatus("Email đã được thay đổi!!!")
+      } else{
+        setStatus(message);
+      }})
     .catch(error => console.log('error', error));
         
   }
@@ -40,24 +45,16 @@ export default function changePassword() {
       <Image style ={styles.avatar} source = {require('../../../assets/login.png')}/>
       
       <TextInput
-        onChangeText = {(text) => setCurrentPassword(text)}
+        onChangeText = {(text) => setNewEmail(text)}
         style = {styles.textInput}
-        placeholder = "Current Password"
-        secureTextEntry
-        defaultValue = {currentPassword}
-      />
-      <TextInput
-        onChangeText = {(text) => setNewPassword(text)}
-        style = {styles.textInput}
-        placeholder = "New Password"
-        secureTextEntry
-        defaultValue = {newPassword}
+        placeholder = "New Email"
+        defaultValue = {newEmail}
       />
       <Text>{status}</Text>
       <TouchableOpacity 
-        onPress = {changePassword}
+        onPress = {changeEmailButton}
         style = {styles.btn}>
-        <Text style = {styles.btnText}>Change Password</Text>
+        <Text style = {styles.btnText}>Change Email</Text>
       </TouchableOpacity>
     </View>
   );

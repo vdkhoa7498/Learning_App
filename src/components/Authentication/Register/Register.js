@@ -4,41 +4,40 @@ import {ScreenKey} from '../../../globals/constants'
 import * as RootNavigation from '../../../../RootNavigation';
 import axios from 'axios'
 
-export default function Register() {
+export default function Register(props) {
 
-  const [inputUsername, setInputUsername] = useState("");
-  const [inputEmail, setInputEmail] = useState("");
-  const [inputPhone, setInputPhone] = useState("");
-  const [inputPassword, setInputPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [status, setStatus] = useState("")
 
-
-  var configRegister = {
-    method: 'post',
-    url: 'http://api.dev.letstudy.org/user/register',
-    headers: { 
-      'Content-Type': 'application/json', 
-    },
-    data: {
-      username: inputUsername,
-      email: inputEmail,
-      phone: inputPhone,
-      password: inputPassword}
-  };
-
-  const register = (props) => {
+  const registerButton = () => {
     
-    axios(configRegister).then((response) =>{
-      if (response.status == 200){
-        // props.navigation.navigate(ScreenKey.LoginScreen)
-      } else{
-          console.log(response)
-      }
-    }).catch((error) =>{
-        console.log(error)
-    })
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
+    var raw = JSON.stringify({"username":String(username),"email":String(email),"phone":String(phone),"password":String(password)});
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("http://api.dev.letstudy.org/user/register", requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        let message = JSON.parse(result).message;
+        if (message=="OK"){
+          setStatus("Tài khoản đăng ký thành công!!!")
+        } else{
+          setStatus(message);
+        }})
+      .catch(error => console.log('error', error));
     
-  };
+  }
 
   return (
     <View style={styles.container}>
@@ -46,33 +45,27 @@ export default function Register() {
       <TextInput
         style = {styles.textInput}
         placeholder = "User Name"
-        defaultValue={inputUsername}
-        onChange={value => {
-          setInputUsername(value);
-        }}
+        defaultValue={username}
+        onChangeText={(value) => setUsername(value)}
       />
       <TextInput
         style = {styles.textInput}
         placeholder = "Email"
-        defaultValue={inputEmail}
-        onChange={value => {
-          setInputEmail(value);
-        }}
+        defaultValue={email}
+        onChangeText={(value) => setEmail(value)}
       />
       <TextInput
         style = {styles.textInput}
         placeholder = "Phone"
-        defaultValue={inputPhone}
-        onChange={value => {
-          setInputPhone(value);
-        }}
+        defaultValue={phone}
+        onChangeText={(value) => setPhone(value)}
       />
       <TextInput
         style = {styles.textInput}
         type="password"
         secureTextEntry
-        defaultValue={inputPassword}
-        onChange={value => {setInputPassword}}
+        defaultValue={password}
+        onChangeText={(value) => setPassword(value)}
         placeholder = "Password"
       />
       {/* <TextInput
@@ -80,8 +73,9 @@ export default function Register() {
         type="password"
         placeholder = "Confirm Password"
       /> */}
+      <Text>{status}</Text>
       <TouchableOpacity 
-        onPress= {()=>{register()}}
+        onPress= {registerButton}
         style = {styles.btn}>
         <Text style = {styles.btnText}>Register</Text>
       </TouchableOpacity>

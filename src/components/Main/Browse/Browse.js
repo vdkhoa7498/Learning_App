@@ -5,11 +5,20 @@ import ListCourses from '../../Common/ListCourses/list-courses'
 import ImageButton from '../../Common/image-button'
 import axios from 'axios'
 import {ScreenKey} from '../../../globals/constants'
+import {userInfoStore} from '../../../app/store'
 
 export default function Browse(props) {
 
-  const onPressNewReleases = () => {
-    console.log('Pressed on New Releases')
+  const idUser = userInfoStore.getState().id;
+  const onPressRecommend = () => {
+    axios.get(`http://api.dev.letstudy.org/user/recommend-course/${idUser}/10/1`)
+    .then((response) =>{
+      {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
+      <ListCourses courses = {response.data.payload}/>
+      console.log(response.data.payload)
+    }).catch((error) =>{
+      console.log(error)
+    })
   }
 
   const onPressTopSell = () =>{
@@ -56,7 +65,7 @@ export default function Browse(props) {
       <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='TOP NEW' onPress={onPressTopNew}/>
       <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='TOP SELL' onPress={onPressTopSell}/>
       <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='TOP RATE' onPress={onPressTopRate}/>
-      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='RECOMMENDED FOR YOU' onPress={onPressNewReleases}/>
+      <ImageButton image="https://anhdepfree.com/wp-content/uploads/2019/05/hinh-nen-background-dep-1.jpg" title='RECOMMENDED FOR YOU' onPress={onPressRecommend}/>
       {/* <ScrollView horizontal = {true}>
           <View>
             <ImageButton image="https://guildit.org/wp-content/uploads/2020/04/sell-online-hero.png" title='TOP SELL' onPress={onPressTopSell}/>
