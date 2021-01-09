@@ -1,19 +1,12 @@
 import React from 'react'
-import {View, TouchableOpacity, Text, StyleSheet} from 'react-native'
+import {View, ScrollView, Text, StyleSheet} from 'react-native'
 
-export default function Download(){
-    return (
-        <View style={styles.container}>
-            {/* <Image source ={require('../../../../assets/arrow-cloud-download.png')}/> */}
-            <Text>Watch your courses on the go!</Text>
-            <Text>Download courses so you can continue to skill up-even when you're offline</Text>
-            <TouchableOpacity 
-                style={styles.touch}
-                onPress={() => navigation.navigate('Browse')}
-            >
-                <Text>'FIND A COURSE TO DOWNLOAD' </Text>
-            </TouchableOpacity>
-        </View>
+export default function Download(props){
+        
+      return (
+        <ScrollView>
+          {/* <ListCourses navigation={props.navigation} courses= {courses}/> */}
+        </ScrollView>
       );
 }
 

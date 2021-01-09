@@ -1,47 +1,40 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import SectionCoursesItem from '../SectionCoursesItem/section-courses-item';
+import {tokenStore} from '../../../../app/store'
 
 export default function SectionCourses(props) {
-  const courses = [
-      {
-          id: 1,
-          title: "Android",
-          author: "Hai Pham",
-          level: "Advance",
-          released: "Nov 6, 2020",
-          duration: "30 hours",
-          uri: 'https://vnreview.vn/image/19/18/53/1918537.jpg'
-      },
-      {
-        id: 2,
-        title: "IOS",
-        author: "Hai Pham",
-        level: "Advance",
-        released: "Nov 6, 2020",
-        duration: "30 hours",
-        uri: 'https://fptshop.com.vn/Uploads/images/2015/Tin-Tuc/TP/29-12-2015/he-dieu-hanh-ios-la-gi-1.jpg'
-    },
-    {
-      id: 3,
-      title: "React Native",
-      author: "Hai Pham",
-      level: "Advance",
-      released: "Nov 6, 2020",
-      duration: "30 hours",
-      uri: 'https://miro.medium.com/max/1000/1*kQ11_TLArd7xGuWiSomBSg.png'
-  }
-  ]
 
+  const token = tokenStore.getState();
+  const [courses, setCourses] = useState([])
+
+  useEffect(() => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", "Bearer " + token);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+
+    fetch("http://api.dev.letstudy.org" + props.route, requestOptions)
+      .then(response => response.text())
+      .then(result => {setCourses(JSON.parse(result).payload);})
+      .catch(error => console.log('error', error));
+  })
+  
   const renderListItem = () =>{
-      return courses.map( item => <SectionCoursesItem item={item} navigation={props.navigation}/>);
+    
+    return courses.map( (item, index) => <SectionCoursesItem key ={index} navigation={props.navigation} item={item}/>);
       // return courses.map(Item => <SectionCoursesItem Item = {Item}/>);
   }
 
   return (
     <View style={styles.container}>
       <View>
-        <Text>{props.title}</Text>
+        <Text style={styles.title}>{props.title}</Text>
       </View>
       <ScrollView horizontal = {true}>
           {renderListItem() }
@@ -52,9 +45,14 @@ export default function SectionCourses(props) {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 20,
     flex: 1,
     backgroundColor: '#fff',
     // alignItems: 'center',
     // justifyContent: 'center',
+  },
+  title:{
+    fontSize: 16,
+    fontWeight: 'bold'
   }
 });

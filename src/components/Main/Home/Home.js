@@ -1,21 +1,13 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import SectionCourses from './SectionCourses/section-courses'
-import ImageButton from '../../Common/image-button'
 
-export default function Home() {
-
-  const onPressNewReleases = () => {
-    console.log('Pressed on New Releases')
-  }
+export default function Home(props) {
 
   return (
     <ScrollView>
-      <ImageButton title='NEW REALESE' onPress={onPressNewReleases()}/>
-      <SectionCourses title='Continue learning'/>
-      <SectionCourses title='Path'/>
-      <SectionCourses title='Channel'/>
-      <SectionCourses title='Bookmarks'/>
+      <SectionCourses route="/user/get-process-courses" navigation={props.navigation} title='Khoá học của tôi'/>
+      <SectionCourses route="/user/get-favorite-courses" navigation={props.navigation} title='Khoá học yêu thích của tôi'/>
     </ScrollView>
   );
 }

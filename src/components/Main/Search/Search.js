@@ -11,7 +11,7 @@ export default function Search(){
           <Button 
             onPress = {() => {console.log('search')}}
             title = 'Search'
-            style = {{width: 60, height: 40, margin: 5}}
+            style = {styles.btn}
           />
         </View>
       );
@@ -19,12 +19,18 @@ export default function Search(){
 
 const styles = StyleSheet.create({
     container:{
-
+      flex:1,
+      alignContent: "flex-start",
+      justifyContent: "flex-start",
+      margin: 10
     },
     searchbox:{
-        flex: 1, 
         borderColor: 'gray', 
         borderWidth: 1,
         height: 40,
+    },
+    btn: {
+      height: 40, 
+      margin: 5
     }
 })
