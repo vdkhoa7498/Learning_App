@@ -126,6 +126,7 @@ export default function CoursesDetail(props){
             isLooping
             style={{ width: 400, height: 270 }}
           />
+          
           <View style={styles.containerBtn}>
             <TouchableOpacity 
               onPress={pressLikeButton}

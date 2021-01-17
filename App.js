@@ -34,6 +34,7 @@ const HomeStack = createStackNavigator();
 const MainStack = createStackNavigator();
 const DownloadsStack = createStackNavigator();
 const BrowseStack = createStackNavigator();
+const SearchStack = createStackNavigator();
 const infoButton = () =>{
   RootNavigation.navigate(ScreenKey.ProfileScreen)
 }
@@ -63,11 +64,28 @@ const BrowseStackScreen = () => (
           <MaterialCommunityIcons name="account-circle" color={"#000"} size={26} />
       </TouchableOpacity>
       )}}/>
-    {/* <BrowseStack.Screen name={ScreenKey.ProfileScreen} component={Profile}/> */}
-    <BrowseStack.Screen name={ScreenKey.ListCourses} component={ListCourses}/>
-    <BrowseStack.Screen name={ScreenKey.CourseDetail} component={CourseDetail}/>
+    
+    <BrowseStack.Screen name={ScreenKey.ListCourses} component={ListCourses} options = {{headerShown: false}}/>
+    <BrowseStack.Screen name={ScreenKey.CourseDetail} component={CourseDetail} options = {{headerShown: false}}/>
   </BrowseStack.Navigator>
 );
+
+const SearchStackScreen = () => (
+  <SearchStack.Navigator>
+    <SearchStack.Screen 
+      name="Search" 
+      component={Search} 
+      options = {{headerRight: () => (
+        <TouchableOpacity onPress={infoButton} >
+          <MaterialCommunityIcons name="account-circle" color={"#000"} size={26} />
+      </TouchableOpacity>
+      )}}/>
+    
+    <SearchStack.Screen name={ScreenKey.ListCourses} component={ListCourses} options = {{headerShown: false}}/>
+    <SearchStack.Screen name={ScreenKey.CourseDetail} component={CourseDetail} options = {{headerShown: false}}/>
+  </SearchStack.Navigator>
+);
+
 
 const DownloadsStackScreen = () => (
   <DownloadsStack.Navigator>
@@ -103,7 +121,7 @@ const MainTabNavigator = () =>(
         tabBarLabel: 'Home',
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="home" color={color} size={26} />
-        ),
+        )
       }}
     />
     <Tab.Screen 
@@ -142,7 +160,7 @@ const MainTabNavigator = () =>(
     />
     <Tab.Screen 
       name="Search" 
-      component={Search} 
+      component={SearchStackScreen} 
       options={{
         headerShown: false,
         tabBarLabel: 'Search',

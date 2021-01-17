@@ -3,6 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'reac
 import {ScreenKey} from '../../../globals/constants'
 import * as RootNavigation from '../../../../RootNavigation';
 import axios from 'axios'
+import { SocialIcon } from 'react-native-elements'
 import {tokenStore, userInfoStore} from '../../../app/store'
 
 export default function Login(props) {
@@ -79,6 +80,18 @@ export default function Login(props) {
         style = {styles.btn}>
         <Text style = {styles.btnText}>Login</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.socialButton}>
+        <View style={{display: 'flex', flexDirection:'row'}}>
+        <Text style={styles.btnText}>Login with Google</Text>
+        <SocialIcon
+          light
+          raised={false}
+          type='google'
+        />
+        </View>
+      </TouchableOpacity>
+      
+
       <Text style={styles.linkText}>You don't have account? 
       <TouchableOpacity 
           style={styles.linkText}
@@ -115,10 +128,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#0061BD",
     alignItems: "center"
   },
+  socialButton:{
+    alignItems: 'center',
+    width: 300,
+    backgroundColor: '#ac1822',
+    marginTop: 20,
+  },
   linkText: {
     marginTop:10,
   },
   btnText:{
+    marginTop: 8,
     justifyContent: "center",
     alignItems: "center",
     color: "#fff"
