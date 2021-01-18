@@ -3,7 +3,6 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'reac
 import {ScreenKey} from '../../../globals/constants'
 import * as RootNavigation from '../../../../RootNavigation';
 
-import {tokenStore, userInfoStore} from '../../../app/store'
 import { useSelector, useDispatch } from "react-redux";
 import { loginAction } from "../../../action/authentication-action";
 
@@ -26,8 +25,8 @@ export default function Login(props) {
       setMessage("")
       dispatch(loginAction(email, password));
       
-      // props.navigation.navigate(ScreenKey.MainTabScreen)
-      // tokenStore.dispatch({ type: 'SET_TOKEN', token: localStorage.getItem("token") })
+      props.navigation.navigate(ScreenKey.MainTabScreen)
+      
     
     }
     
@@ -72,6 +71,15 @@ export default function Login(props) {
         </View>
       </TouchableOpacity>
       
+      <Text style={styles.linkText}>You don't remember Password? 
+      <TouchableOpacity 
+          style={styles.linkText}
+          onPress = {() =>{
+            RootNavigation.navigate(ScreenKey.ForgetPasswordScreen)
+          }}>
+          <Text style={{color: "blue", marginLeft: 10}}>Reset Password</Text>
+        </TouchableOpacity>
+      </Text>
 
       <Text style={styles.linkText}>You don't have account? 
       <TouchableOpacity 

@@ -33,6 +33,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ListCourses from './src/components/Common/ListCourses/list-courses'
+import ForgetPassword from './src/components/Authentication/ForgetPassword/ForgetPassword';
 
 
 // const Tab = createBottomTabNavigator();
@@ -205,6 +206,11 @@ const MainStackNavigation =() => (
     <MainStack.Screen
       name = {ScreenKey.RegisterScreen}
       component = {Register}
+      options = {{headerShown: false}}
+    />
+    <MainStack.Screen
+      name = {ScreenKey.ForgetPasswordScreen}
+      component = {ForgetPassword}
       options = {{headerShown: false}}
     />
     <MainStack.Screen

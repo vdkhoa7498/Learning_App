@@ -1,4 +1,5 @@
 import Axios from "axios";
+import {tokenStore} from '../app/store'
 
 let axios = Axios.create({
   baseURL: "http://api.dev.letstudy.org",
@@ -8,8 +9,8 @@ let axios = Axios.create({
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
   //get token
-  // let token = JSON.parse(localStorage.getItem("token"));
-  let token = "";
+
+  let token = tokenStore.getState();
   config.headers.Authorization = token ? `Bearer ${token}` : "";
   return config;
 });

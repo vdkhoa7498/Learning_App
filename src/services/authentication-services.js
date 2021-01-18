@@ -16,6 +16,13 @@ export function registerApi(username, email, phone, password) {
   });
 }
 
+export function forgetPasswordApi(email) {
+  return axios.post("/user/forget-pass/send-email", {
+    email
+  });
+}
+
+
 export function getInfoApi() {
   return axios.post("/user/me", {
   });

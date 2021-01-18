@@ -9,20 +9,21 @@ export default function SectionCourses(props) {
   const [courses, setCourses] = useState([])
 
   useEffect(() => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer " + token);
+    console.log(token)
+    // var myHeaders = new Headers();
+    // myHeaders.append("Content-Type", "application/json");
+    // myHeaders.append("Authorization", "Bearer " + token);
 
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
+    // var requestOptions = {
+    //   method: 'GET',
+    //   headers: myHeaders,
+    //   redirect: 'follow'
+    // };
 
-    fetch("http://api.dev.letstudy.org" + props.route, requestOptions)
-      .then(response => response.text())
-      .then(result => {setCourses(JSON.parse(result).payload);})
-      .catch(error => console.log('error', error));
+    // fetch("http://api.dev.letstudy.org" + props.route, requestOptions)
+    //   .then(response => response.text())
+    //   .then(result => {setCourses(JSON.parse(result).payload);})
+    //   .catch(error => console.log('error', error));
   })
   
   const renderListItem = () =>{
