@@ -1,6 +1,13 @@
 import React from 'react';
 import { Button, StyleSheet, TouchableOpacity } from 'react-native';
 import 'react-native-gesture-handler'
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
+import rootReducer  from "./src/reducer/index";
+
+export const myStore = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+
 import { navigationRef } from './RootNavigation';
 import * as RootNavigation from'./RootNavigation';
 import Home from './src/components/Main/Home/Home'
@@ -235,28 +242,11 @@ const MainStackNavigation =() => (
 
 export default function App() {
   return (
+    <Provider store={myStore}>
+      <NavigationContainer ref={navigationRef}>
+        <MainStackNavigation/>
+      </NavigationContainer>
+    </Provider>
     
-    <NavigationContainer ref={navigationRef}>
-      <MainStackNavigation/>
-    </NavigationContainer>
   );
 }
-
-
-const styles = StyleSheet.create({
-  button: {
-      height: 100,
-      borderRadius: 50,
-      margin: 5,
-  },
-  touch:{
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
-  },
-  title:{
-      fontSize: 24,
-      color: 'white',
-      fontWeight: 'bold'
-  }
-})

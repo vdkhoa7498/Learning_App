@@ -2,59 +2,35 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import {ScreenKey} from '../../../globals/constants'
 import * as RootNavigation from '../../../../RootNavigation';
-import axios from 'axios'
-import { SocialIcon } from 'react-native-elements'
+
 import {tokenStore, userInfoStore} from '../../../app/store'
+import { useSelector, useDispatch } from "react-redux";
+import { loginAction } from "../../../action/authentication-action";
+
 
 export default function Login(props) {
 
+  const isLoading = useSelector((state) => state.loginReducer.isLoading);
+  const messageRes = useSelector((state) => state.loginReducer.message);
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [status, setStatus] = useState('');
+  const [message, setMessage] = useState('');
 
   const login = () => {
 
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({"email":String(email),"password":String(password)});
-
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
-
-    fetch("http://api.dev.letstudy.org/user/login", requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        let message = JSON.parse(result).message;
-        if (message=="OK"){
-          tokenStore.dispatch({ type: 'SET_TOKEN', token: JSON.parse(result).token })
-          userInfoStore.dispatch({ type: 'SET_INFO', info: JSON.parse(result).userInfo })
-          props.navigation.navigate(ScreenKey.MainTabScreen)
-        } else{
-          setStatus(message);
-        }
-        
-        console.log(result)})
-      .catch(error => console.log('error', error));
-
-    // axios(configLogin).then((response) =>{
-    //   if (response.status == 200){
-
-    //     tokenStore.dispatch({ type: 'SET_TOKEN', token: response.data.token })
-    //     userInfoStore.dispatch({ type: 'SET_INFO', info: response.data.userInfo })
-    //     props.navigation.navigate(ScreenKey.MainTabScreen)
-    //   } else{
-    //       console.log(response.message)
-    //   }
-    // }).catch((error) =>{
-    //   // if ()
-    //   // console.log(error.status);
-    //     setStatus("Login Failed");
-    // })
+    if ((email=="")||(password=="")){
+      setMessage("Vui lòng không để trống ô nhập")
+    } else{
+      setMessage("")
+      dispatch(loginAction(email, password));
+      
+      // props.navigation.navigate(ScreenKey.MainTabScreen)
+      // tokenStore.dispatch({ type: 'SET_TOKEN', token: localStorage.getItem("token") })
+    
+    }
+    
   };
 
   return (
@@ -74,20 +50,25 @@ export default function Login(props) {
         secureTextEntry
         defaultValue = {password}
       />
-      <Text>{status}</Text>
+      <Text>{message}</Text>
+      <Text>{messageRes}</Text>
       <TouchableOpacity 
         onPress = {login}
         style = {styles.btn}>
         <Text style = {styles.btnText}>Login</Text>
       </TouchableOpacity>
+
+      {/* <GoogleSigninButton
+        style={{ width: 192, height: 48 }}
+        size={GoogleSigninButton.Size.Wide}
+        color={GoogleSigninButton.Color.Dark}
+        onPress={this._signIn}
+        disabled={this.state.isSigninInProgress} /> */}
+
       <TouchableOpacity style={styles.socialButton}>
         <View style={{display: 'flex', flexDirection:'row'}}>
         <Text style={styles.btnText}>Login with Google</Text>
-        <SocialIcon
-          light
-          raised={false}
-          type='google'
-        />
+        
         </View>
       </TouchableOpacity>
       
@@ -131,6 +112,7 @@ const styles = StyleSheet.create({
   socialButton:{
     alignItems: 'center',
     width: 300,
+    height: 40,
     backgroundColor: '#ac1822',
     marginTop: 20,
   },
