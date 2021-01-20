@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import {ScreenKey} from '../../../globals/constants'
 import * as RootNavigation from '../../../../RootNavigation';
@@ -24,13 +24,15 @@ export default function Login(props) {
     } else{
       setMessage("")
       dispatch(loginAction(email, password));
-      
-      props.navigation.navigate(ScreenKey.MainTabScreen)
-      
-    
     }
-    
   };
+
+  useEffect(() => {
+    
+    if(messageRes=="Đăng nhập thành công"){
+      props.navigation.navigate(ScreenKey.MainTabScreen)
+    }
+  })
 
   return (
     <>

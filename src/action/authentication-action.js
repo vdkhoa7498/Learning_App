@@ -1,4 +1,5 @@
 import {forgetPasswordApi, loginApi, registerApi} from '../services/authentication-services'
+import * as SecureStore from 'expo-secure-store';
 import {
     LOGIN_SUCESSED,
     LOGIN_FAILURE,
@@ -11,19 +12,30 @@ import {
     FORGET_PASSWORD_FAILURE
 } from '../reducer/authentication-reducer'
 
-import {tokenStore} from '../app/store'
-
 export const loginAction = (email, password) => {
+
+  const setToken = async (token) => {
+    try {
+      await SecureStore.setItemAsync(
+        'token',
+        token
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+
   function request() { 
     return { 
       type: LOGIN_REQUEST,
       message: "Đang đăng nhập"
   }}
   
-  function success() { 
+  function success(message) { 
     return { 
       type: LOGIN_SUCESSED, 
-      message: "Đăng nhập thành công" 
+      message: message
   }}
   
   function failure(message) { 
@@ -36,13 +48,14 @@ export const loginAction = (email, password) => {
       dispatch(request());
       loginApi(email, password)
         .then((loginResponse) => {
-          tokenStore.dispatch({ type: 'SET_TOKEN', token: JSON.stringify(loginResponse.data.token) })
           // console.log(JSON.stringify(loginResponse.data.token))
-          dispatch(success());
+          
+          setToken(loginResponse.data.token);
+          dispatch(success('Đăng nhập thành công'));
         })
         .catch((err) => {
-          // console.log("err", JSON.stringify(err.response.data.message));
-          dispatch(failure(JSON.stringify(err.response.data.message)));
+          // console.log("err", JSON.stringify(err));
+          dispatch(failure(err.response.data.message));
           
         });
     };
@@ -81,7 +94,7 @@ export const loginAction = (email, password) => {
         })
         .catch((err) => {
           // console.log("error", JSON.stringify(err.response.data.message))
-          dispatch(failure(JSON.stringify(err.response.data.message)));
+          dispatch(failure(err.response.data.message));
           
         });
     };
@@ -119,8 +132,8 @@ export const loginAction = (email, password) => {
           dispatch(success("Email reset mật khẩu đã gửi đi! Vui lòng kiểm tra email..."));
         })
         .catch((err) => {
-          // console.log("error", JSON.stringify(err.response.data.message))
-          dispatch(failure(err.response.data.message));
+          // console.log("error", Promise.reject(err))
+          dispatch(failure(Promise.reject(err.response.data.message)));
           
         });
     };

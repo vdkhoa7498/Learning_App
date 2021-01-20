@@ -1,6 +1,7 @@
 import axios from "../ultis/axios";
 
 export function loginApi(email, password) {
+  
   return axios.post("/user/login", {
     email,
     password,
@@ -24,6 +25,6 @@ export function forgetPasswordApi(email) {
 
 
 export function getInfoApi() {
-  return axios.post("/user/me", {
+  return axios.get("/user/me", {
   });
 }

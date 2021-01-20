@@ -1,16 +1,22 @@
 import Axios from "axios";
-import {tokenStore} from '../app/store'
+import * as SecureStore from 'expo-secure-store';
 
-let axios = Axios.create({
+const axios = Axios.create({
+  
   baseURL: "http://api.dev.letstudy.org",
   headers: { "Content-Type": "application/json" },
 });
 
 // Add a request interceptor
-axios.interceptors.request.use(function (config) {
+axios.interceptors.request.use(async function (config) {
   //get token
-
-  let token = tokenStore.getState();
+  var token
+  try {
+    token = await SecureStore.getItemAsync('token');
+    console.log('get token', token)
+  } catch (e) {
+    console.log(e);
+  }
   config.headers.Authorization = token ? `Bearer ${token}` : "";
   return config;
 });
