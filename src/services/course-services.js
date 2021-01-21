@@ -27,39 +27,39 @@ export function getTopNewApi(limit, page) {
     });
   }
 
-  export function getCourseInfo(id) {
+  export function getCourseInfoApi(id) {
     return axios.get("/course/get-course-info", {
         id
     });
   }
 
-  export function getCourseDetail(id, userId) {
+  export function getCourseDetailApi(id, userId) {
     return axios.get("/course/get-course-detail/",id,"/",{userId}, {
         id,
         userId
     });
   }
   
-  export function getLessonDetail(courseId) {
+  export function getLessonDetailApi(courseId) {
     return axios.get("/course/detail-with-lesson/",courseId, {
         courseId
     });
   }
 
-  export function getProcessCourse(courseId) {
+  export function getProcessCourseApi(courseId) {
     return axios.get("/course/process-course/",courseId, {
         courseId
     });
   }
 
-  export function getLastWatchedLesson(courseId) {
+  export function getLastWatchedLessonApi(courseId) {
     return axios.get("/course/last-watched-lesson/",courseId, {
         courseId
     });
   }
 
   
-  export function ratingCourse(courseId, formalityPoint, contentPoint, presentationPoint, content) {
+  export function ratingCourseApi(courseId, formalityPoint, contentPoint, presentationPoint, content) {
     return axios.post("/course/rating-course", {
         courseId: courseId,
         formalityPoint: formalityPoint,
@@ -69,13 +69,13 @@ export function getTopNewApi(limit, page) {
     });
   }
 
-  export function getRating(courseId) {
+  export function getRatingApi(courseId) {
     return axios.get("/course/get-rating/",courseId, {
         courseId
     });
   }
 
-  export function reportCourse(courseId, content, subject) {
+  export function reportCourseApi(courseId, content, subject) {
     return axios.post("/course/report-course", {
         courseId: courseId,
         content: content,
@@ -83,7 +83,7 @@ export function getTopNewApi(limit, page) {
     });
   }
 
-  export function search(keyword, attribute, rule, category) {
+  export function searchApi(keyword, attribute, rule, category) {
     return axios.post("/course/report-course", {
         keyword: keyword,
         opt: {

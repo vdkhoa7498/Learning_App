@@ -1,41 +1,33 @@
 import {searchApi} from '../services/search-services'
 import {
-    SEARCH_SUCESSED,
-    DELETE_HISTORY
-} from '../reducer/authentication-reducer'
+    SEARCH_ADD_HISTORY,
+    SEARCH_DELETE_HISTORY
+} from '../reducer/search-reducer'
 
-export const searchAction = (keyword, attribute, rule, category) => {
-  function request() { 
+export const addHistoryAction = (keyword) => {
+  function addHistory() { 
     return { 
-      type: LOGIN_REQUEST,
-      message: "Đang đăng nhập"
+      type: SEARCH_ADD_HISTORY,
+      keyword: keyword
   }}
   
-  function success(token) { 
-    return { 
-      type: LOGIN_SUCESSED, 
-      message: "Đăng nhập thành công" ,
-      token: token
-  }}
-  
-  function failure(message) { 
-    return { 
-      type: LOGIN_FAILURE, 
-      message: message  
-  }}
-
-    return (dispatch) => {
-      dispatch(request());
-      loginApi(email, password)
-        .then((loginResponse) => {
-          // console.log(JSON.stringify(loginResponse.data.token))
-          dispatch(success(loginResponse.data.token));
-        })
-        .catch((err) => {
-          // console.log("err", JSON.stringify(err.response.data.message));
-          dispatch(failure(JSON.stringify(err.response.data.message)));
-          
-        });
+      return (dispatch) => {
+      dispatch(addHistory(keyword));
+      
     };
   
   };
+
+  export const deleteHistoryAction = (index) => {
+        
+    function deleteHistory(index) { 
+      return { 
+        type: SEARCH_DELETE_HISTORY, 
+        index: index
+    }}
+        return (dispatch) => {
+        dispatch(deleteHistory(index));
+      
+      };
+    
+    };

@@ -28,12 +28,12 @@ import LearnCourse from './src/components/Common/Course/LearnCourse'
 import {ScreenKey} from './src/globals/constants'
 
 import { NavigationContainer } from '@react-navigation/native';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import ListCourses from './src/components/Common/ListCourses/list-courses'
 import ForgetPassword from './src/components/Authentication/ForgetPassword/ForgetPassword';
+import ListCoursesResult from './src/components/Main/Search/ListCoursesResult/list-courses'
 
 
 // const Tab = createBottomTabNavigator();
@@ -89,7 +89,7 @@ const SearchStackScreen = () => (
       </TouchableOpacity>
       )}}/>
     
-    <SearchStack.Screen name={ScreenKey.ListCourses} component={ListCourses} options = {{headerShown: false}}/>
+    <SearchStack.Screen name={ScreenKey.ListCourses} component={ListCoursesResult} options = {{headerShown: false}}/>
     <SearchStack.Screen name={ScreenKey.CourseDetail} component={CourseDetail} options = {{headerShown: false}}/>
   </SearchStack.Navigator>
 );

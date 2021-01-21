@@ -14,7 +14,7 @@ import {
 
 export const loginAction = (email, password) => {
 
-  const setToken = async (token) => {
+  const setTokenId = async (token, userId) => {
     try {
       await SecureStore.setItemAsync(
         'token',
@@ -32,10 +32,11 @@ export const loginAction = (email, password) => {
       message: "Đang đăng nhập"
   }}
   
-  function success(message) { 
+  function success(message, userInfo) { 
     return { 
       type: LOGIN_SUCESSED, 
-      message: message
+      message: message,
+      userInfo: userInfo
   }}
   
   function failure(message) { 
@@ -49,9 +50,9 @@ export const loginAction = (email, password) => {
       loginApi(email, password)
         .then((loginResponse) => {
           // console.log(JSON.stringify(loginResponse.data.token))
+          setTokenId(loginResponse.data.token);
           
-          setToken(loginResponse.data.token);
-          dispatch(success('Đăng nhập thành công'));
+          dispatch(success('Đăng nhập thành công',loginResponse.data.userInfo));
         })
         .catch((err) => {
           // console.log("err", JSON.stringify(err));

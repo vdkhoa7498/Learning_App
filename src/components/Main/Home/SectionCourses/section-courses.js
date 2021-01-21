@@ -1,35 +1,17 @@
 import React,{useState, useEffect} from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import SectionCoursesItem from '../SectionCoursesItem/section-courses-item';
-import {tokenStore} from '../../../../app/store'
+
 
 export default function SectionCourses(props) {
 
-  const token = tokenStore.getState();
-  const [courses, setCourses] = useState([])
-
-  useEffect(() => {
-    console.log(token)
-    // var myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-    // myHeaders.append("Authorization", "Bearer " + token);
-
-    // var requestOptions = {
-    //   method: 'GET',
-    //   headers: myHeaders,
-    //   redirect: 'follow'
-    // };
-
-    // fetch("http://api.dev.letstudy.org" + props.route, requestOptions)
-    //   .then(response => response.text())
-    //   .then(result => {setCourses(JSON.parse(result).payload);})
-    //   .catch(error => console.log('error', error));
-  })
-  
-  const renderListItem = () =>{
+  const renderListItem = (courses) =>{
     
-    return courses.map( (item, index) => <SectionCoursesItem key ={index} navigation={props.navigation} item={item}/>);
-      // return courses.map(Item => <SectionCoursesItem Item = {Item}/>);
+    console.log(courses)
+    // return courses.map( (item, index) => 
+    //   <SectionCoursesItem key ={index} navigation={props.navigation} item={item}/>
+    // );
+    //   // return courses.map(Item => <SectionCoursesItem Item = {Item}/>);
   }
 
   return (
@@ -38,7 +20,7 @@ export default function SectionCourses(props) {
         <Text style={styles.title}>{props.title}</Text>
       </View>
       <ScrollView horizontal = {true}>
-          {renderListItem() }
+          {renderListItem(props.courses) }
       </ScrollView>
     </View>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native'
-import * as RootNavigation from '../../../../RootNavigation'
-import {ScreenKey} from '../../../globals/constants'
+import * as RootNavigation from '../../../../../RootNavigation'
+import {ScreenKey} from '../../../../globals/constants'
 
 
 

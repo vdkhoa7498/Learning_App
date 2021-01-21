@@ -13,7 +13,8 @@ export const FORGET_PASSWORD_FAILURE = "FORGET_PASSWORD_FAILURE";
   const inititalState = {
     isLoading: false,
     message: '',
-    token: ''
+    token: '',
+    userInfo:{}
   };
   
 export  const loginReducer = (state = inititalState, action) => {
@@ -27,7 +28,8 @@ export  const loginReducer = (state = inititalState, action) => {
         return {
           ...state,
           isLoading: false,
-          message: action.message
+          message: action.message,
+          userInfo: action.userInfo
         };
       case LOGIN_FAILURE:
         return {

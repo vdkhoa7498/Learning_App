@@ -13,7 +13,6 @@ axios.interceptors.request.use(async function (config) {
   var token
   try {
     token = await SecureStore.getItemAsync('token');
-    console.log('get token', token)
   } catch (e) {
     console.log(e);
   }
