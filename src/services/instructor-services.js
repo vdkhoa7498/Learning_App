@@ -8,7 +8,5 @@ export function getAllInstructorApi() {
 
 export function getInstructorApi(id) {
   
-    return axios.get("/instructor/detail/:id",id, {
-        id
-    });
+    return axios.get(`/instructor/detail/${id}`);
   }

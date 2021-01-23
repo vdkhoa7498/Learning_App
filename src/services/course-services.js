@@ -27,30 +27,16 @@ export function getTopNewApi(limit, page) {
     });
   }
 
-  export function getCourseInfoApi(id) {
-    return axios.get("/course/get-course-info", {
-        id
-    });
-  }
 
-  export function getCourseDetailApi(id, userId) {
-    return axios.get("/course/get-course-detail/",id,"/",{userId}, {
-        id,
-        userId
-    });
+  export function getDetailWithLessonApi(courseId) {
+    return axios.get(`/course/detail-with-lesson/${courseId}`);
   }
   
-  export function getLessonDetailApi(courseId) {
-    return axios.get("/course/detail-with-lesson/",courseId, {
-        courseId
-    });
-  }
 
-  export function getProcessCourseApi(courseId) {
-    return axios.get("/course/process-course/",courseId, {
-        courseId
-    });
+  export function getProcessCoursesApi(courseId) {
+    return axios.get(`/course/process-course/${courseId}`);
   }
+  
 
   export function getLastWatchedLessonApi(courseId) {
     return axios.get("/course/last-watched-lesson/",courseId, {
