@@ -19,7 +19,7 @@ export default function Profile() {
   useEffect(()=>{
     getInfoApi()
     .then(function (response) {
-      console.log(response)
+      
       setAvatar(response.data.payload.avatar);
       setName(response.data.payload.name);
       setEmail(response.data.payload.email);

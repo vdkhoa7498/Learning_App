@@ -62,7 +62,7 @@ export function updateFavoriteCategoriesApi(categoryIds) {
   });
 }
 
-export function getRecommendCourseApi() {
+export function getRecommendCourseApi(id, limit, offset) {
   return axios.get(`/user/recommend-course/${id}/${limit}/${offset}`);
 }
 
@@ -72,7 +72,7 @@ export function likeCourseApi(courseId) {
   });
 }
 
-export function getCourseLikeStatusApi() {
+export function getCourseLikeStatusApi(courseId) {
   return axios.get(`/user/get-course-like-status/${courseId}`);
 }
 
@@ -88,6 +88,6 @@ export function getIntroPageApi() {
   return axios.get(`/user/intro-page`);
 }
 
-export function getCheckOwnCourse() {
+export function getCheckOwnCourseApi(courseId) {
   return axios.get(`/user/check-own-course/${courseId}`);
 }

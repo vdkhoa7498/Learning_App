@@ -7,7 +7,7 @@ export function getFreeCourseApi(courseId) {
   });
 }
 
-export function getInstructorApi(courseId) {
+export function getCourseInfoApi(courseId) {
   
     return axios.get(`/payment/get-course-info/${courseId}`);
   }

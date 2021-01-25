@@ -7,7 +7,7 @@ import {ScreenKey} from '../../../globals/constants'
 
 export default function Course(props){
   const onPress = () =>{
-    RootNavigation.navigate(ScreenKey.CourseDetail, {item: props.item})
+    RootNavigation.navigate(ScreenKey.CourseDetail, {courseId: props.item.id})
   }
 
     return (

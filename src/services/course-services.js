@@ -21,12 +21,16 @@ export function getTopNewApi(limit, page) {
     });
   }
   
-  export function getFavoriteCoursesApi(userId) {
+  export function getFavoriteCategoryCoursesApi(userId) {
     return axios.post("/course/courses-user-favorite-categories", {
         userId
     });
   }
 
+
+  export function getCourseDetailApi(id, userId) {
+    return axios.get(`/course/get-course-detail/${id}/${userId}`);
+  }
 
   export function getDetailWithLessonApi(courseId) {
     return axios.get(`/course/detail-with-lesson/${courseId}`);
@@ -70,14 +74,14 @@ export function getTopNewApi(limit, page) {
   }
 
   export function searchApi(keyword, attribute, rule, category) {
-    return axios.post("/course/report-course", {
-        keyword: keyword,
+    return axios.post("/course/search", {
+        keyword,
         opt: {
             sort: {
-            attribute: attribute,
-            rule: rule
+            attribute,
+            rule
             },
-            category: category
+            category
             ,
             time: [
             {
@@ -105,7 +109,8 @@ export function getTopNewApi(limit, page) {
         },
         limit: 10,
         offset: 1
-    });
+    }
+    );
   }
 
   export function getSearchHistory() {

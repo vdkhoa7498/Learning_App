@@ -12,10 +12,7 @@ export default function Search(props){
 
   
   const searchBtn = () =>{
-    console.log("press search button keyword: ", keyword)
-
     props.navigation.navigate(ScreenKey.ListCourses, {keyword: keyword})
-
     setHistorySearchList([...historySearchList, keyword])
   }
 

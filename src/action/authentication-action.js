@@ -14,14 +14,14 @@ import {
 
 export const loginAction = (email, password) => {
 
-  const setTokenId = async (token, userId) => {
+  const setTokenId = async (token) => {
     try {
       await SecureStore.setItemAsync(
         'token',
         token
       );
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -49,9 +49,8 @@ export const loginAction = (email, password) => {
       dispatch(request());
       loginApi(email, password)
         .then((loginResponse) => {
-          // console.log(JSON.stringify(loginResponse.data.token))
-          setTokenId(loginResponse.data.token);
           
+          setTokenId(loginResponse.data.token);
           dispatch(success('Đăng nhập thành công',loginResponse.data.userInfo));
         })
         .catch((err) => {

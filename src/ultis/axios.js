@@ -13,8 +13,8 @@ axios.interceptors.request.use(async function (config) {
   var token
   try {
     token = await SecureStore.getItemAsync('token');
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.log("can't not get token", err);
   }
   config.headers.Authorization = token ? `Bearer ${token}` : "";
   return config;

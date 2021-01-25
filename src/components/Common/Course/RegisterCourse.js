@@ -3,12 +3,11 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'reac
 import {ScreenKey} from '../../../globals/constants'
 import {tokenStore} from '../../../app/store'
 import * as RootNavigation from '../../../../RootNavigation';
+import { getFreeCourseApi, getCourseInfoApi } from '../../../services/payment-services';
 
 export default function LearnCourse(props) {
-
-    console.log(props)
   const idCourse = props.route.params.idCourse;
-  const token = tokenStore.getState();
+  
   const [title, setTitle] = useState("");
   const [instructorName, setInstructorName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -16,43 +15,23 @@ export default function LearnCourse(props) {
 
 
   useEffect(()=>{
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer " + token);
-
-    var requestOptions = {
-    method: 'GET',
-    headers: myHeaders,
-    redirect: 'follow'
-    };
-
-    fetch("http://api.dev.letstudy.org/payment/get-course-info/eb90b9f3-c699-4d09-abc4-2108bd8b87fb", requestOptions)
-    .then(response => response.text())
-    .then(result => {
-        setTitle(JSON.parse(result).payload.title)
-        setInstructorName(JSON.parse(result).payload.instructorName)
-        setImageUrl(JSON.parse(result).payload.imageUrl)
+    
+    getCourseInfoApi(idCourse)
+    .then(response => {
+        setTitle(response.data.payload.title)
+        setInstructorName(response.data.payload.instructorName)
+        setImageUrl(response.data.payload.imageUrl)
     })
     .catch(error => console.log('error', error));
   })
 
   const register = () =>{
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Bearer " + token);
-
-    var raw = JSON.stringify({"courseId":String(idCourse)});
-
-    var requestOptions = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw,
-    redirect: 'follow'
-    };
-
-    fetch("http://api.dev.letstudy.org/payment/get-free-courses", requestOptions)
-    .then(response => response.text())
-    .then(result => {setStatus("Khoá học đăng ký thành công")})
+    
+    getFreeCourseApi(idCourse)
+    .then(response => {
+      setStatus("Khoá học đăng ký thành công")
+      // props.navigation.
+    })
     .catch(error => console.log('error', error));
   }
   

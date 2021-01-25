@@ -12,6 +12,7 @@ export default function Course(props){
 
     return (
         <View style={styles.item}>
+          {console.log("render: ", props.item)}
           <TouchableOpacity onPress={onPress}>
             <Image style={styles.image} source={{uri: `${props.item.imageUrl}`}}/>
             <View style={styles.viewText}>

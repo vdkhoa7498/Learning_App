@@ -6,12 +6,10 @@ import SectionCoursesItem from '../SectionCoursesItem/section-courses-item';
 export default function SectionCourses(props) {
 
   const renderListItem = (courses) =>{
-    
-    console.log(courses)
-    // return courses.map( (item, index) => 
-    //   <SectionCoursesItem key ={index} navigation={props.navigation} item={item}/>
-    // );
-    //   // return courses.map(Item => <SectionCoursesItem Item = {Item}/>);
+    return courses.map( (item, index) => 
+      <SectionCoursesItem key ={index} navigation={props.navigation} item={item}/>
+    );
+
   }
 
   return (
