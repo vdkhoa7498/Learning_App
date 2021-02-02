@@ -6,34 +6,30 @@ import ImageButton from '../../Common/image-button'
 import axios from 'axios'
 import {ScreenKey} from '../../../globals/constants'
 import {userInfoStore} from '../../../app/store'
+import {getAllInstructorApi, getInstructorApi} from '../../../services/instructor-services'
+import { getRecommendCourseApi } from '../../../services/authentication-services';
+import { getTopNewApi, getTopRateApi, getTopSellApi } from '../../../services/course-services';
 
 export default function Browse(props) {
 
   const [instructors, setInstructors] = useState([]);
   const idUser = userInfoStore.getState().id;
+  const [isLoaded, setIsLoaded] = useState(true);
 
   useEffect(()=>{
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = "";
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
-
-    fetch("http://api.dev.letstudy.org/instructor", requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        setInstructors(JSON.parse(result).payload);
+    if (isLoaded){
+      getAllInstructorApi()
+      .then(response => {
+        setInstructors(response.data.payload);
+        setIsLoaded(false)
       })
       .catch(error => console.log('error', error));
+    }
+    
   })
   const onPressRecommend = () => {
-    axios.get(`http://api.dev.letstudy.org/user/recommend-course/${idUser}/10/1`)
+    // axios.get(`http://api.dev.letstudy.org/user/recommend-course/${idUser}/10/1`)
+    getRecommendCourseApi(idUser,10,1)
     .then((response) =>{
       {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
       <ListCourses courses = {response.data.payload}/>
@@ -43,10 +39,12 @@ export default function Browse(props) {
   }
 
   const onPressTopSell = () =>{
-    axios.post('http://api.dev.letstudy.org/course/top-sell',{
-      "limit": 10,
-      "page": 1
-    }). then((response) =>{
+    // axios.post('http://api.dev.letstudy.org/course/top-sell',{
+    //   "limit": 10,
+    //   "page": 1
+    // })
+    getTopSellApi(10,1)
+    . then((response) =>{
       {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
     }).catch((error) =>{
       console.log(error)
@@ -54,10 +52,12 @@ export default function Browse(props) {
   }
 
   const onPressTopNew = () =>{
-    axios.post('http://api.dev.letstudy.org/course/top-new',{
-      "limit": 10,
-      "page": 1
-    }). then((response) =>{
+    // axios.post('http://api.dev.letstudy.org/course/top-new',{
+    //   "limit": 10,
+    //   "page": 1
+    // })
+    getTopNewApi(10,1)
+    . then((response) =>{
       {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
     }).catch((error) =>{
       console.log(error)
@@ -65,10 +65,12 @@ export default function Browse(props) {
   }
 
   const onPressTopRate = () =>{
-    axios.post('http://api.dev.letstudy.org/course/top-rate',{
-      "limit": 10,
-      "page": 1
-    }). then((response) =>{
+    // axios.post('http://api.dev.letstudy.org/course/top-rate',{
+    //   "limit": 10,
+    //   "page": 1
+    // })
+    getTopRateApi(10,1)
+    . then((response) =>{
       {props.navigation.navigate(ScreenKey.ListCourses, {data: response.data.payload})}
       // <ListCourses courses = {response.data.payload}/>
     }).catch((error) =>{

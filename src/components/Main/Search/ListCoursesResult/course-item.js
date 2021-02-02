@@ -1,17 +1,18 @@
 import React from 'react';
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native'
-import * as RootNavigation from '../../../../RootNavigation'
-import {ScreenKey} from '../../../globals/constants'
+import * as RootNavigation from '../../../../../RootNavigation'
+import {ScreenKey} from '../../../../globals/constants'
 
 
 
 export default function Course(props){
   const onPress = () =>{
-    RootNavigation.navigate(ScreenKey.CourseDetail, {courseId: props.item.id})
+    RootNavigation.navigate(ScreenKey.CourseDetail, {item: props.item})
   }
 
     return (
         <View style={styles.item}>
+          {console.log("render: ", props.item)}
           <TouchableOpacity onPress={onPress}>
             <Image style={styles.image} source={{uri: `${props.item.imageUrl}`}}/>
             <View style={styles.viewText}>

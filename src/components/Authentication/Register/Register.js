@@ -2,40 +2,36 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import {ScreenKey} from '../../../globals/constants'
 import * as RootNavigation from '../../../../RootNavigation';
-import axios from 'axios'
+
+import { useSelector, useDispatch } from "react-redux";
+import { registerAction } from "../../../action/authentication-action";
 
 export default function Register(props) {
+
+  // const messageRes = useSelector((state) => state.registerReducer.message);
+  const messageRes = useSelector((state) => state.registerReducer.message);
+  const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState("")
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [message, setMessage] = useState("")
 
+  
   const registerButton = () => {
-    
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({"username":String(username),"email":String(email),"phone":String(phone),"password":String(password)});
-
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
-
-    fetch("http://api.dev.letstudy.org/user/register", requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        let message = JSON.parse(result).message;
-        if (message=="OK"){
-          setStatus("Tài khoản đăng ký thành công!!!")
-        } else{
-          setStatus(message);
-        }})
-      .catch(error => console.log('error', error));
+    // console.log("username: ",username,", email:",email,", phone: ",phone,", password: ",password, "=", passwordConfirm)
+    if ((username=="")||(email=="")||(phone=="")||(password=="")){
+      setMessage("Vui lòng không để trống ô nhập")
+    } else
+    if (passwordConfirm!==password){
+      setMessage("Mật khẩu và mật khẩu xác thực không khớp")
+    } else{
+      setMessage("");
+      dispatch(registerAction(username, email, phone, password))
+      
+    }
     
   }
 
@@ -68,12 +64,16 @@ export default function Register(props) {
         onChangeText={(value) => setPassword(value)}
         placeholder = "Password"
       />
-      {/* <TextInput
+      <TextInput
         style = {styles.textInput}
         type="password"
+        secureTextEntry
+        defaultValue={passwordConfirm}
+        onChangeText={(value) => setPasswordConfirm(value)}
         placeholder = "Confirm Password"
-      /> */}
-      <Text>{status}</Text>
+      />
+      <Text>{message}</Text>
+      <Text>{messageRes}</Text>
       <TouchableOpacity 
         onPress= {registerButton}
         style = {styles.btn}>

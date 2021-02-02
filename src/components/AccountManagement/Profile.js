@@ -3,7 +3,8 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'reac
 import {ScreenKey} from '../../globals/constants'
 import {tokenStore} from '../../app/store'
 import * as RootNavigation from '../../../RootNavigation';
-import axios from 'axios'
+import { getInfoApi } from '../../services/authentication-services';
+
 
 export default function Profile() {
 
@@ -16,15 +17,9 @@ export default function Profile() {
 
 
   useEffect(()=>{
-    axios({
-      method: 'get',
-      url: 'http://api.dev.letstudy.org/user/me',
-      headers: { 
-        'Content-Type': 'application/json', 
-        'Authorization': 'Bearer '+ token
-      },
-    })
+    getInfoApi()
     .then(function (response) {
+      
       setAvatar(response.data.payload.avatar);
       setName(response.data.payload.name);
       setEmail(response.data.payload.email);
@@ -32,7 +27,7 @@ export default function Profile() {
       setType(response.data.payload.type);
     })
     .catch(function (error) {
-      console.log(error);
+      console.log(error.response.data.message);
     });
   })
   
